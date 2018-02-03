@@ -5,7 +5,7 @@ use Mix.Config
 config :slackerton, Slackerton.Robot,
   adapter: Hedwig.Adapters.Slack,
   #adapter: Hedwig.Adapters.Console,
-  name: "dr.slackerton",
+  name: "slackerton",
   aka: "/",
   token: System.get_env("MATHBEAR_SLACK_TOKEN"),
   rooms: [],
