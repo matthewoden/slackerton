@@ -5,7 +5,7 @@ defmodule Slackerton.Responders.Rotator do
   use Responder
 
   @usage "
-  rotate <message> - Applies rot13 to encode decode a message.
+  rotate <message> - Applies rot13 to encode/decode a message.
   "
 
   hear ~r/^rotate/, msg do
