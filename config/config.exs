@@ -3,8 +3,8 @@
 use Mix.Config
 
 config :slackerton, Slackerton.Robot,
-  adapter: Hedwig.Adapters.Slack,
-  #adapter: Hedwig.Adapters.Console,
+  #adapter: Hedwig.Adapters.Slack,
+  adapter: Hedwig.Adapters.Console,
   name: "slackerton",
   aka: "/",
   token: System.get_env("MATHBEAR_SLACK_TOKEN"),
@@ -14,8 +14,13 @@ config :slackerton, Slackerton.Robot,
     {Slackerton.Responders.Mathbear, []},
     {Slackerton.Responders.Slap, []},
     {Slackerton.Responders.Search, []},
-    {Slackerton.Responders.Rotator, []}
+    {Slackerton.Responders.Rotator, []},
+    {Slackerton.Responders.NaturalLanguage, []}
   ]
 
+config :slackerton, 
+  http_adapter: HttpBuilder.Adapters.HTTPoison,
+  json_decoder: Jason,
+  wolfram_key: System.get_env("SLACKERTON_WOLFRAM_API_TOKEN")
 
-# import_config "#{Mix.env}.exs"
+#import_config "#{Mix.env}.exs"

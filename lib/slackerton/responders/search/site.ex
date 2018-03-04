@@ -3,10 +3,11 @@ defmodule Slackerton.Responders.Search.Site do
   require Logger
   
   @google_base_url "https://www.google.com/search"
+  @adapter Application.get_env(:slackerton, :http_adapter, Http.Adapters.HTTPoison)
 
   def search(query, site \\ "") do
     Http.new()
-    |> Http.with_adapter(Http.Adapters.HTTPoison)
+    |> Http.with_adapter(@adapter)
     |> Http.get(@google_base_url)
     |> Http.with_query_params(%{"q" => String.trim("#{site} #{query}")})
     |> Http.send()
