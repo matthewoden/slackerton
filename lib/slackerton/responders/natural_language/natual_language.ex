@@ -7,7 +7,7 @@ defmodule Slackerton.Responders.NaturalLanguage do
 
   @usage "hey doc <question?> - checks various sources for an answer."
 
-  hear ~r/^hey doc/, msg do
+  hear ~r/^hey doc/i, msg do
     answer = 
       msg.text
       |> String.replace("hey doc", "")
