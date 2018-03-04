@@ -15,7 +15,7 @@ defmodule Slackerton.Responders.NaturalLanguage.Wolfram do
 
     query = 
       if Map.get(options, :location) do
-        Map.update(query, "location", options.location)
+        Map.put(query, "location", options.location)
       else
         query
       end
@@ -47,7 +47,7 @@ defmodule Slackerton.Responders.NaturalLanguage.Wolfram do
   end
 
   def parse_response({:ok, %{status_code: 200, body: body}}, :json) do
-    Json.decode(body)
+    @json.decode(body)
   end
 
   def parse_response(error, _) do

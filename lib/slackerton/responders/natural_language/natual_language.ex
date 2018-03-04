@@ -1,5 +1,5 @@
 defmodule Slackerton.Responders.NaturalLanguage do
-  alias Hedwig.{Message, Responder}
+  alias Hedwig.{Responder}
   alias Slackerton.Responders.NaturalLanguage.Wolfram
   alias Slackerton.Slack
 
