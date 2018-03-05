@@ -24,6 +24,7 @@ defmodule Slackerton.Responders.NaturalLanguage.Wolfram do
     |> with_adapter(@http)
     |> with_host("https://api.wolframalpha.com/v1")
     |> with_query_params(query)
+    |> with_receive_timeout(30_000)
   end
   
   def simple(question, options) do
@@ -50,13 +51,24 @@ defmodule Slackerton.Responders.NaturalLanguage.Wolfram do
     @json.decode(body)
   end
 
+  @misunderstood [
+    "Sorry, I don't understand what you want. Maybe be a little more specific?",
+    "Not quite sure what you mean - could you rephrase the question?",
+    "I don't know what you're looking for. Could you try asking a different way?"
+  ]
+  def parse_response({:ok, %{ body: "Wolfram|Alpha did not understand your input"}}, _) do
+    Enum.random(@misunderstood)
+  end
+
+  @unknown [
+    "Hmm. I'm not sure.",
+    "Good question. I have no idea.",
+    "Google it yourself."
+  ]
+
   def parse_response(error, _) do
     Logger.error(inspect(error)) 
-    Enum.random([
-      "Hmm. I'm not sure.",
-      "Good question. I have no idea.",
-      "Google it yourself."
-    ])
+    Enum.random(@unknown)
   end
   
 end

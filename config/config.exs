@@ -23,4 +23,8 @@ config :slackerton,
   json_decoder: Jason,
   wolfram_key: System.get_env("SLACKERTON_WOLFRAM_API_TOKEN")
 
+config :logger,
+  backends: [:console],
+  compile_time_purge_level: :info
+
 #import_config "#{Mix.env}.exs"
