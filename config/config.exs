@@ -3,8 +3,6 @@
 use Mix.Config
 
 config :slackerton, Slackerton.Robot,
-  adapter: Hedwig.Adapters.Slack,
-  #adapter: Hedwig.Adapters.Console,
   name: "slackerton",
   aka: "/",
   token: System.get_env("MATHBEAR_SLACK_TOKEN"),
@@ -15,7 +13,8 @@ config :slackerton, Slackerton.Robot,
     {Slackerton.Responders.Slap, []},
     {Slackerton.Responders.Search, []},
     {Slackerton.Responders.Rotator, []},
-    {Slackerton.Responders.NaturalLanguage, []}
+    {Slackerton.Responders.NaturalLanguage, []},
+    {Slackerton.Responders.Trivia, []}
   ]
 
 config :slackerton, 
@@ -27,4 +26,4 @@ config :logger,
   backends: [:console],
   compile_time_purge_level: :info
 
-#import_config "#{Mix.env}.exs"
+import_config "#{Mix.env}.exs"

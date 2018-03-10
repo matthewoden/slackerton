@@ -20,4 +20,10 @@ defmodule Slackerton.Robot do
   def handle_in(_msg, state) do
     {:noreply, state}
   end
+
+  def broadcast(msg) do
+    pid = :global.whereis_name("slackerton")
+    Hedwig.Robot.send(pid, msg)
+  end
+
 end

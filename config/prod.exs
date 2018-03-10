@@ -1,4 +1,4 @@
 use Mix.Config
 
 config :slackerton, Slackerton.Robot,
-  adapter: Hedwig.Adapters.Console
+  adapter: Hedwig.Adapters.Slack
