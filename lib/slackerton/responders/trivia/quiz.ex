@@ -48,8 +48,8 @@ defmodule Slackerton.Responders.Trivia.Quiz do
 
   defp record_answer(id, answer) do
     formatted_answer = String.upcase(answer) |> String.replace("!", "")
-    
-    case quiz do
+
+    case get_quiz do
       %{correct: ^formatted_answer} = state ->
         update_quiz(:winners, fn winners -> MapSet.put(winners, id) end)
 

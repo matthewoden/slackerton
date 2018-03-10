@@ -28,7 +28,6 @@ defmodule Slackerton.Responders.Trivia do
   """
 
   hear ~r/^a!|^b!|^c!|^d!|^e!/i, %{user: user, text: text} = msg do
-    
     if Trivia.Quiz.in_quiz() do
       Trivia.Quiz.answer(user, text)
     end
