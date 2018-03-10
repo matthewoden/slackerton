@@ -18,7 +18,7 @@ defmodule Slackerton.Responders.Trivia do
       send msg, "One question at a time, please."
     else
       Trivia.Quiz.new()
-      Process.send_after(self(), {:times_up, msg}, 10_000)
+      Process.send_after(self(), {:times_up, msg}, 15_000)
       send msg, Trivia.Quiz.prompt()
     end
   end
@@ -27,9 +27,11 @@ defmodule Slackerton.Responders.Trivia do
   a! b! c! d! (during a quiz) - Answer the current trivia question.
   """
 
-  hear ~r/^a!|^b!|^c!|^d!|^e!/i, %{user: user, text: text} = msg do
+  hear ~r/^a$|^b$|^c$|^d$|^e$/i, %{user: user, text: text} = msg do
     if Trivia.Quiz.in_quiz() do
       Trivia.Quiz.answer(user, text)
+    else
+      :ok
     end
   end
 

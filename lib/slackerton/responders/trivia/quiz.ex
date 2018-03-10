@@ -31,6 +31,11 @@ defmodule Slackerton.Responders.Trivia.Quiz do
       choices
       |> Enum.map(fn {choice, answer} -> "#{choice}) #{answer}" end) 
       |> Enum.join("\n")
+    
+    answer_list = 
+      choices
+      |> Enum.map(fn {choice, answer} -> "#{choice}" end) 
+      |> Enum.join(", ")
 
     """
     POP QUIZ HOT SHOT:
@@ -39,7 +44,7 @@ defmodule Slackerton.Responders.Trivia.Quiz do
     Choices: 
     #{choice_list}
 
-    Reply with "a! b! c! or d!"
+    Reply with just: #{answer_list}
     """
   end
 
@@ -49,7 +54,7 @@ defmodule Slackerton.Responders.Trivia.Quiz do
   defp record_answer(id, answer) do
     formatted_answer = String.upcase(answer) |> String.replace("!", "")
 
-    case get_quiz do
+    case get_quiz() do
       %{correct: ^formatted_answer} = state ->
         update_quiz(:winners, fn winners -> MapSet.put(winners, id) end)
 
