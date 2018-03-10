@@ -34,7 +34,7 @@ defmodule Slackerton.Responders.Trivia.Quiz do
     
     answer_list = 
       choices
-      |> Enum.map(fn {choice, answer} -> "#{choice}" end) 
+      |> Enum.map(fn {choice, _} -> "#{choice}" end) 
       |> Enum.join(", ")
 
     """
@@ -55,7 +55,7 @@ defmodule Slackerton.Responders.Trivia.Quiz do
     formatted_answer = String.upcase(answer) |> String.replace("!", "")
 
     case get_quiz() do
-      %{correct: ^formatted_answer} = state ->
+      %{correct: ^formatted_answer} ->
         update_quiz(:winners, fn winners -> MapSet.put(winners, id) end)
 
       _ ->
