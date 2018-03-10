@@ -3,7 +3,7 @@ defmodule Slackerton.Brain do
   @brain Application.get_env(:slackerton, Slackerton.Brain, [])
   @adapter Keyword.get(@brain, :adapter, Slackerton.Brain.ProcessStore)
 
-  defdelegate start_link(), to: @adapter
+  defdelegate start_link(_), to: @adapter
     
   defdelegate get(key), to: @adapter
     

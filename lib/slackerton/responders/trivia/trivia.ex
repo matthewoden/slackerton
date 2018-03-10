@@ -42,7 +42,7 @@ defmodule Slackerton.Responders.Trivia do
       robot: pid,
       room: msg.room,
       text: Trivia.Quiz.display_results(),
-      type: "chat"
+      type: "message"
     })
 
     {:noreply, state}
