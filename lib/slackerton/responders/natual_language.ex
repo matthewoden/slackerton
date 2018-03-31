@@ -10,14 +10,15 @@ defmodule Slackerton.Responders.NaturalLanguage do
   @usage "hey doc <ask for a joke> - Returns a joke."
 
 
-  hear ~r/i'm/i, msg do
+  hear ~r/(I'm)|(I’m)/i, msg do
     IO.inspect("testing")
     subject =
       msg.text
+      |> Normalize.decode_characters()
       |> String.split(~r/I'm/i, [parts: 2])
+      |> IO.inspect()
       |> Enum.at(1)
       |> String.trim()
-      |> Normalize.decode_characters()
 
     reply msg, "Hi #{subject}, I'm dad!"
   end
