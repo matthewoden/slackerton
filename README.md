@@ -1,6 +1,6 @@
 # Slackerton
 
-Hedwig Slackbot for a local gaming Normalize
+Hedwig Slackbot for a local gaming slack
 
 Responders:
 
@@ -11,4 +11,4 @@ Responders:
 * Rotate - Rot13 encode/decode
 * Mathbear - Pick between multiple options
 * Slap - IRC-esque slap
-* Natural Language - Wolfram/Lex
+* Natural Language - Wolfram/AWS Lex
