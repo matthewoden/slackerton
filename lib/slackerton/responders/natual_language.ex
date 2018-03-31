@@ -11,16 +11,21 @@ defmodule Slackerton.Responders.NaturalLanguage do
 
 
   hear ~r/(I'm)|(I’m)/i, msg do
-    IO.inspect("testing")
-    subject =
-      msg.text
-      |> Normalize.decode_characters()
-      |> String.split(~r/I'm/i, [parts: 2])
-      |> IO.inspect()
-      |> Enum.at(1)
-      |> String.trim()
 
-    reply msg, "Hi #{subject}, I'm dad!"
+    case Enum.random(1..10) do
+      10 ->
+        subject =
+          msg.text
+          |> Normalize.decode_characters()
+          |> String.split(~r/I'm/i, [parts: 2])
+          |> IO.inspect()
+          |> Enum.at(1)
+          |> String.trim()
+    
+        reply msg, "Hi #{subject}, I'm dad!"
+      _ ->
+        :ok
+    end
   end
 
   hear ~r/^hey doc/i, msg do
