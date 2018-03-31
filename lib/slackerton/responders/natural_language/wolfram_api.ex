@@ -3,7 +3,7 @@ defmodule Slackerton.Responders.NaturalLanguage.Wolfram do
   import HttpBuilder
 
   @http Application.get_env(:slackerton, :http_adapter, HttpBuilder.Adapters.HTTPoison)
-  @json Application.get_env(:slackerton, :json_decoder, Jason)
+  @json Application.get_env(:slackerton, :json_parser, Jason)
   @app_id Application.get_env(:slackerton, :wolfram_key)
 
   defp client(options \\ %{}) do
@@ -22,6 +22,7 @@ defmodule Slackerton.Responders.NaturalLanguage.Wolfram do
 
     HttpBuilder.new()
     |> with_adapter(@http)
+    |> with_json_parser(Jason)
     |> with_host("https://api.wolframalpha.com/v1")
     |> with_query_params(query)
     |> with_receive_timeout(30_000)

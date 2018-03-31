@@ -8,6 +8,7 @@ defmodule Slackerton.Responders.Search.Site do
   def search(query, site \\ "") do
     Http.new()
     |> Http.with_adapter(@adapter)
+    |> Http.with_json_parser(Jason)
     |> Http.get(@google_base_url)
     |> Http.with_query_params(%{"q" => String.trim("#{site} #{query}")})
     |> Http.send()

@@ -2,7 +2,7 @@ defmodule Slackerton.Responders.Trivia.Api do
   import HttpBuilder
   require Logger
   @http Application.get_env(:slackerton, :http_adapter, HttpBuilder.Adapters.HTTPoison)
-  @json Application.get_env(:slackerton, :json_decoder, Jason)
+  @json Application.get_env(:slackerton, :json_parser, Jason)
 
   def get() do
     client() |> HttpBuilder.send() |> parse_response()
@@ -11,6 +11,7 @@ defmodule Slackerton.Responders.Trivia.Api do
   defp client() do
     HttpBuilder.new()
     |> with_adapter(@http)
+    |> with_json_parser(Jason)
     |> with_host("https://opentdb.com/api.php")
     |> with_query_params(%{
         "amount" => 1,

@@ -8,6 +8,7 @@ defmodule Slackerton.Responders.Search.Wikipedia do
     Http.new()
     |> Http.with_adapter(Http.Adapters.HTTPoison)
     |> Http.get(@base_url)
+    |> Http.with_json_parser(Jason)
     |> Http.with_query_params(%{
         "action" => "opensearch",
         "search"=> query,

@@ -1,6 +1,6 @@
 defmodule Slackerton.Responders.Trivia.Quiz do
   alias Slackerton.Responders.Trivia
-  alias Slackerton.Slack
+  alias Slackerton.Normalize
   alias Slackerton.Brain
 
   use Agent 
@@ -81,7 +81,7 @@ defmodule Slackerton.Responders.Trivia.Quiz do
 
   def format_winners(winners) do
     winners
-    |> Enum.map(&Slack.to_user_string/1) 
+    |> Enum.map(&Normalize.to_user_string/1) 
     |> Enum.join(", ")
   end
 

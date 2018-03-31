@@ -1,7 +1,7 @@
 defmodule Slackerton.Responders.Rotator do
   
   alias Hedwig.Responder
-  alias Slackerton.Slack
+  alias Slackerton.Normalize
   use Responder
 
   @usage "
@@ -13,7 +13,7 @@ defmodule Slackerton.Responders.Rotator do
       msg.text
       |> String.replace("rotate", "")
       |> String.trim()
-      |> Slack.decode_characters()
+      |> Normalize.decode_characters()
       |> encode()
 
     send(msg, rotated)

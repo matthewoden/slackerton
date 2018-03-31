@@ -1,4 +1,4 @@
-defmodule Slackerton.Application do
+defmodule Lex.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,12 +8,10 @@ defmodule Slackerton.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      {Slackerton.Robot, []},
-      {Slackerton.Brain, []},
-      {Lex.Runtime.Conversations, []}
+      {Lex.Runtime.Conversations, []},
     ]
 
-    opts = [strategy: :one_for_one, name: Slackerton.Supervisor]
+    opts = [strategy: :one_for_one, name: Lex.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end
