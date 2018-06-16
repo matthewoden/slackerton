@@ -27,12 +27,12 @@ defmodule Slackerton.MixProject do
   defp deps do
     [
       {:hedwig, "~> 1.0"},
-      {:httpoison, "~> 0.13"},
-      {:httpotion, "~> 3.0"},
+      {:httpoison, ">= 1.2.0"},
       {:jason, "~> 1.0"},
       {:floki, "~> 0.19"},
-      {:http_builder, "~> 0.4"},
+      {:http_builder, "~> 0.4.1"},
       # {:hedwig_slack, "~> 1.0"},
+      {:lex, github: "matthewoden/lex", branch: "master", override: true},
       {:hedwig_slack, github: "matthewoden/hedwig_slack", branch: "master" },
       {:aws_auth, "~> 0.7.1"}
     ]

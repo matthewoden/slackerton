@@ -1,17 +1,7 @@
-defmodule Slackerton.Responders.NaturalLanguage.DadJokes do
+defmodule Slackerton.Responders.DadJokes.Api do
   import HttpBuilder
   @http Application.get_env(:slackerton, :http_adapter, HttpBuilder.Adapters.HTTPoison)
   @json Application.get_env(:slackerton, :json_parser, Jason)
-  
-  
-  defp client() do
-    HttpBuilder.new()
-    |> with_adapter(@http)
-    |> with_json_parser(Jason)
-    |> with_host("https://icanhazdadjoke.com/")
-    |> with_headers(%{"accept" => "application/json"})
-    |> with_receive_timeout(30_000)
-  end
 
   def get(term) do
     client()
@@ -26,6 +16,15 @@ defmodule Slackerton.Responders.NaturalLanguage.DadJokes do
     |> get("")
     |> send()
     |> parse_random_response()
+  end
+  
+  defp client() do
+    HttpBuilder.new()
+    |> with_adapter(@http)
+    |> with_json_parser(Jason)
+    |> with_host("https://icanhazdadjoke.com/")
+    |> with_headers(%{"accept" => "application/json"})
+    |> with_receive_timeout(30_000)
   end
 
   defp parse_search_response({:ok, %{status_code: 200, body: body}}, phrase) do

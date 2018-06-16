@@ -1,32 +1,15 @@
 defmodule Slackerton.Responders.NaturalLanguage do
+  require Logger
 
   alias Hedwig.{Responder}
-  alias Slackerton.Responders.NaturalLanguage.{DadJokes}
+  alias Slackerton.Responders.DadJokes
   alias Slackerton.Normalize
-  alias Lex.Runtime.Response
+  alias Lex.Runtime.{Response,Request}
+
 
   use Responder
 
   @usage "hey doc <ask for a joke> - Returns a joke."
-
-
-  hear ~r/(I'm)|(I’m)/i, msg do
-
-    case Enum.random(1..10) do
-      10 ->
-        subject =
-          msg.text
-          |> Normalize.decode_characters()
-          |> String.split(~r/I'm/i, [parts: 2])
-          |> IO.inspect()
-          |> Enum.at(1)
-          |> String.trim()
-    
-        reply msg, "Hi #{subject}, I'm dad!"
-      _ ->
-        :ok
-    end
-  end
 
   hear ~r/^hey doc/i, msg do
     input = 
@@ -35,7 +18,8 @@ defmodule Slackerton.Responders.NaturalLanguage do
       |> String.trim()
       |> Normalize.decode_characters()
       
-    Lex.put_text(input, user(msg), context(msg)) |> converse(msg)
+    put_text(input, user(msg), context(msg)) |> converse(msg)
+
     :ok
   end
 
@@ -43,11 +27,11 @@ defmodule Slackerton.Responders.NaturalLanguage do
   def context(%{ private: %{ "ts" => context }}), do: context
   def context(_), do: "default"
 
-  def user(msg), do: Normalize.user_id(msg.user)
+  def user(msg), do: Normalize.user_id(msg.user) <> "_test"
 
   def converse(response, msg) do
     case response do
-      %Response.ElicitIntent{ message: message, } ->
+      %Response.ElicitIntent{ message: message } ->
         Slackerton.Robot.thread(msg, message)
 
       %Response.ConfirmIntent{ message: message } ->
@@ -56,15 +40,26 @@ defmodule Slackerton.Responders.NaturalLanguage do
       %Response.ElicitSlot{ message: message } ->
         Slackerton.Robot.thread(msg, message)
 
-      %Response.ReadyForFulfillment{ intent_name: _intent, slots: slots } ->
-        Slackerton.Robot.thread(msg, DadJokes.get(slots["Genre"]), [reply_broadcast: true])
+      %Response.ReadyForFulfillment{ intent_name: intent, slots: slots } ->
+        fulfillment(intent, slots, msg)
 
-      %Response.Failed{  } ->
-        Slackerton.Robot.thread(msg, "Sorry, something went wrong." )
-
-      %Response.Error{ } ->
-        Slackerton.Robot.thread(msg, "Sorry, something went wrong." )
     end
   end
 
+  def put_text(input, user, context) do
+    Request.new()
+    |> Request.set_bot_name("Slackerton")
+    |> Request.set_bot_alias("dev")
+    |> Request.set_context(context)
+    |> Request.set_user_id(user)
+    |> Request.set_text_input(input)
+    |> Request.send()
+  end
+
+  def fulfillment(intent, slots, msg) do
+    case intent do
+      "DadJokes" ->
+        Slackerton.Robot.thread(msg, DadJokes.Api.get(slots["Genre"]), [reply_broadcast: true])
+    end
+  end
 end       

@@ -4,6 +4,7 @@ defmodule Slackerton.Robot do
 
   alias Slackerton.Responders.NaturalLanguage
   alias Slackerton.Normalize
+  alias Lex.Runtime.{Response, Conversations}
 
   def handle_connect(%{name: name} = state) do
     if :undefined == :global.whereis_name(name) do
@@ -22,16 +23,16 @@ defmodule Slackerton.Robot do
     user = NaturalLanguage.user(msg)
     context = NaturalLanguage.context(msg)
 
-    if Lex.Runtime.Conversations.in_conversation?(user, context) do
-      Logger.debug("IN THREAD > #{user} #{context}")
-      
+    if Conversations.in_conversation?(user, context) do
+      Logger.debug("IN CONVERSATION > #{user} #{context}")
+
       input = 
         msg.text
         |> String.trim()
         |> Normalize.decode_characters()
 
       Lex.put_text(input, user, context) 
-      |> NaturalLanguage.converse(msg)
+      |> NaturalLanguage.converse(context, msg)
     end
 
     {:dispatch, msg, state}
@@ -43,7 +44,6 @@ defmodule Slackerton.Robot do
 
   def broadcast(msg) do
     pid = :global.whereis_name("slackerton")
-
     Hedwig.Robot.send(pid, msg)
   end
 
