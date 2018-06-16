@@ -31,8 +31,8 @@ defmodule Slackerton.Robot do
         |> String.trim()
         |> Normalize.decode_characters()
 
-      Lex.put_text(input, user, context) 
-      |> NaturalLanguage.converse(context, msg)
+      NaturalLanguage.put_text(input, user, context) 
+      |> NaturalLanguage.converse(msg)
     end
 
     {:dispatch, msg, state}
