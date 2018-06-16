@@ -27,7 +27,7 @@ defmodule Slackerton.Responders.NaturalLanguage do
   def context(%{ private: %{ "ts" => context }}), do: context
   def context(_), do: "default"
 
-  def user(msg), do: Normalize.user_id(msg.user) <> "_test"
+  def user(msg), do: Normalize.user_id(msg.user)
 
   def converse(response, msg) do
     case response do
