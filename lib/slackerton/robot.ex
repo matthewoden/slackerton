@@ -4,7 +4,7 @@ defmodule Slackerton.Robot do
 
   alias Slackerton.Responders.NaturalLanguage
   alias Slackerton.Normalize
-  alias Lex.Runtime.{Response, Conversations}
+  alias Lex.Runtime.Conversations
 
   def handle_connect(%{name: name} = state) do
     if :undefined == :global.whereis_name(name) do
@@ -22,7 +22,7 @@ defmodule Slackerton.Robot do
 
     user = NaturalLanguage.user(msg)
     context = NaturalLanguage.context(msg)
-
+    
     if Conversations.in_conversation?(user, context) do
       Logger.debug("IN CONVERSATION > #{user} #{context}")
 

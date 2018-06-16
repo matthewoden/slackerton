@@ -1,7 +1,6 @@
 defmodule Slackerton.Responders.DadJokes do
 
   alias Hedwig.{Responder}
-  alias Slackerton.Responders.DadJokes
   alias Slackerton.Normalize
  
   use Responder
