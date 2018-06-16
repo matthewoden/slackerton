@@ -11,15 +11,16 @@ defmodule Slackerton.Responders.DadJokes do
 
   hear ~r/(I'm)|(I’m)/i, msg do
     case Enum.random(1..10) do
-      10 ->
+      1 ->
         subject =
           msg.text
           |> Normalize.decode_characters()
           |> String.split(~r/I'm/i, [parts: 2])
           |> Enum.at(1)
+          |> String.split(~r/\.|\?|,|!/)
+          |> Enum.at(1)
           |> String.trim()
-          |> String.trim_trailing(~r/\.|\?|,|!/)
-    
+
         reply msg, "Hi #{subject}, I'm dad!"
         
       _ ->
