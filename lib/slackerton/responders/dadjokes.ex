@@ -9,7 +9,7 @@ defmodule Slackerton.Responders.DadJokes do
 
 
   hear ~r/(I'm)|(I’m)/i, msg do
-    case Enum.random(1..1) do
+    case Enum.random(1..10) do
       1 ->
         subject =
           msg.text
