@@ -49,7 +49,7 @@ defmodule Slackerton.Search.Google do
   defp get_first_result({:error, message}, _query), do: message
 
   defp failed_search(query) do
-    "Could not find any results for '#{query}.''"
+    "Could not find any results for '#{query}'."
   end
   
 end

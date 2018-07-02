@@ -15,7 +15,7 @@ defmodule Slackerton.Responders.Search do
   """
   
   hear ~r/^search starfinder/i, msg do
-    reply msg, search_google("search starfinder", msg.text, "site:starfindersrd.com")
+    reply msg, search_google("search starfinder", msg.text, "site:starjammersrd.com")
   end
 
   hear ~r/^search pathfinder/i, msg do
@@ -42,7 +42,7 @@ defmodule Slackerton.Responders.Search do
     message
     |> String.replace(handler, "", global: false)
     |> String.trim()
-    |> Google.search()
+    |> Google.search(prefix)
   end
 
 end
