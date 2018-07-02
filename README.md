@@ -2,9 +2,9 @@
 
 A mostly useless Hedwig Slackbot for a local slack.
 
-Uses a fork of Hedwig to enable support Slack threading.
+Uses my fork of [Hedwig_Slack](https://github.com/matthewoden/hedwig_slack), to enable support for Slack threading.
 
-## Responders:
+## Current Responders:
 
 ### Help
 
@@ -46,7 +46,7 @@ slackerton: POP QUIZ HOT SHOT:
   Reply with just: A, B, C, D
 
 matthewoden: a
-joebob> b
+joe_bob: b
 slackerton: Times Up!
 
 The answer was: D
