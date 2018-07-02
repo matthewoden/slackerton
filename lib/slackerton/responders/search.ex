@@ -3,15 +3,9 @@ defmodule Slackerton.Responders.Search do
   use Hedwig.Responder
   
   @usage """
+  wiki <query>*- Searches wikipedia, returning the first result.
+  google <query> - gets the first google results for your query.
   search starfinder|pathfinder <query> - searches the SRD, returning the first result for your query.
-  """
-
-  @usage """
-  wiki <query> - Searches wikipedia, returning the first result.
-  """
-
-  @usage """
-  google <query> - gets the first google results for your query
   """
   
   hear ~r/^search starfinder/i, msg do

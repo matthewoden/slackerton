@@ -13,7 +13,6 @@ config :slackerton, Slackerton.Robot,
     {Slackerton.Responders.Mathbear, []},
     {Slackerton.Responders.Slap, []},
     {Slackerton.Responders.Search, []},
-    {Slackerton.Responders.Rotator, []},
     {Slackerton.Responders.NaturalLanguage, []},
     {Slackerton.Responders.DadJokes, []},
     {Slackerton.Responders.Trivia, []}

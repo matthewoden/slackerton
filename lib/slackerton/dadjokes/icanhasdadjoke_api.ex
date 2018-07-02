@@ -1,5 +1,6 @@
 defmodule Slackerton.DadJokes.Api do
   import HttpBuilder
+  alias Slackerton.DadJokes.Api
 
   @http Application.get_env(:slackerton, :http_adapter, HttpBuilder.Adapters.HTTPoison)
   @json Application.get_env(:slackerton, :json_parser, Jason)
@@ -31,7 +32,12 @@ defmodule Slackerton.DadJokes.Api do
   defp parse_search_response({:ok, %{status_code: 200, body: body}}, phrase) do
     case @json.decode(body) do
       {:ok, %{ "results" => [] }} ->
-        "I don't know any jokes about '#{phrase}'. What about this? \n #{random()}"
+        if String.ends_with?(phrase, "s") do
+          maybe_singular = String.replace_suffix(phrase, "s", "")
+          Api.get(maybe_singular)
+        else
+          "I don't know any jokes about '#{phrase}'. What about this? \n #{random()}"
+        end
 
       {:ok, %{ "results" => results }} ->
         results

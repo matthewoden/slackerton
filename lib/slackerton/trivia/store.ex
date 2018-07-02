@@ -12,7 +12,6 @@ defmodule Slackerton.Trivia.Store do
       state
       |> Map.update!(:active, fn active -> MapSet.put(active, room) end)
       |> Map.update!(:winners, fn winners -> Map.put(winners, room, MapSet.new()) end)
-      |> IO.inspect()
     end)
   end
 
@@ -21,7 +20,6 @@ defmodule Slackerton.Trivia.Store do
       state
       |> Map.update!(:quiz, &Map.put(&1, room, quiz))
       |> Map.update!(:recently_asked, &MapSet.put(&1, quiz.question))
-      |> IO.inspect()
     end)
   end
 
@@ -37,10 +35,7 @@ defmodule Slackerton.Trivia.Store do
     end
   end
 
-
   def get_quiz(room), do: Map.get(get(:quiz), room)
-
-
 
   def get_winners(room), do: get(:winners)[room]
 

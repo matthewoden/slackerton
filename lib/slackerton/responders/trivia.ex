@@ -8,7 +8,7 @@ defmodule Slackerton.Responders.Trivia do
   alias Slackerton.Trivia
 
   @usage """
-  pop quiz - Asks a trivia question
+  pop quiz - Asks a trivia question. Answer with the letters provided.
   """
 
   hear ~r/^pop quiz/i, %{room: room} = msg do
@@ -20,10 +20,6 @@ defmodule Slackerton.Responders.Trivia do
       send msg, Trivia.prompt(room)
     end
   end
-
-  @usage """
-  a b c d e (during a quiz) - Answer the current trivia question.
-  """
 
   hear ~r/^a$|^b$|^c$|^d$|^e$/i, %{user: user, text: text, room: room} do
     if Trivia.in_quiz(room) do

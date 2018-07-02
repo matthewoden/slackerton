@@ -1,9 +1,18 @@
 defmodule Slackerton.Responders.DadJokes do
+  @moduledoc """
+  The laziest dad joke. Fires only 1 in 10 times.
 
+  "I'm so tired today."
+
+  "Hi 'so tired today', I'm dad!"
+  """
+  
   alias Hedwig.{Responder}
   alias Slackerton.Normalize
  
   use Responder
+
+
 
   hear ~r/(I'm)|(I’m)/i, msg do
     case Enum.random(1..10) do
