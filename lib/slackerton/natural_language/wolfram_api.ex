@@ -1,4 +1,4 @@
-defmodule Slackerton.Responders.NaturalLanguage.Wolfram do
+defmodule Slackerton.NaturalLanguage.Wolfram do
   require Logger
   import HttpBuilder
 

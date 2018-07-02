@@ -5,7 +5,7 @@ defmodule Slackerton.Responders.Mathbear do
   alias Hedwig.{Message, Responder}
   use Responder
 
-  @usage "mathbear <options> - Makes a decision based on input. Format: mathbear pick 1 is left. 2 is right."
+  @usage "mathbear/decide <options> - Makes a decision based on input. Format: decide 1 is left. 2 is right."
 
   @initial_state %{ 
     current_option: "", 
@@ -14,7 +14,7 @@ defmodule Slackerton.Responders.Mathbear do
     options: %{} 
   }
 
-  hear ~r/^mathbear/i, msg, do: mathbear_message(msg)
+  hear ~r/^(mathbear)|(decide)/i, msg, do: mathbear_message(msg)
 
   defp mathbear_message(msg) do
     msg

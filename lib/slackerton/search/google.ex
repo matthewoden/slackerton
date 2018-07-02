@@ -1,4 +1,4 @@
-defmodule Slackerton.Responders.Search.Site do
+defmodule Slackerton.Search.Google do
   alias HttpBuilder, as: Http
   require Logger
   
@@ -37,7 +37,6 @@ defmodule Slackerton.Responders.Search.Site do
         |> Floki.find(".r a")
         |> Enum.at(0, [])
         |> Floki.attribute("href")
-        |> IO.inspect()
         |> Enum.at(0, "")
         |> URI.decode_query()
         |> Map.get("/url?q")

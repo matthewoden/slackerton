@@ -5,30 +5,29 @@ defmodule Slackerton.Responders.Trivia do
   """
   use Hedwig.Responder
   alias Hedwig.Message
-  alias Slackerton.Responders.Trivia.Quiz
+  alias Slackerton.Trivia
 
   @usage """
   pop quiz - Asks a trivia question
   """
 
-  hear ~r/^pop quiz/i, msg do
-
-    if Quiz.in_quiz() do
+  hear ~r/^pop quiz/i, %{room: room} = msg do
+    if Trivia.in_quiz(room) do
       send msg, "One question at a time, please."
     else
-      Quiz.new()
+      Trivia.new(room)
       Process.send_after(self(), {:times_up, msg}, 15_000)
-      send msg, Quiz.prompt()
+      send msg, Trivia.prompt(room)
     end
   end
 
   @usage """
-  a! b! c! d! (during a quiz) - Answer the current trivia question.
+  a b c d e (during a quiz) - Answer the current trivia question.
   """
 
-  hear ~r/^a$|^b$|^c$|^d$|^e$/i, %{user: user, text: text} do
-    if Quiz.in_quiz() do
-      Quiz.answer(user, text)
+  hear ~r/^a$|^b$|^c$|^d$|^e$/i, %{user: user, text: text, room: room} do
+    if Trivia.in_quiz(room) do
+      Trivia.answer(room, user, text)
     else
       :ok
     end
@@ -36,13 +35,12 @@ defmodule Slackerton.Responders.Trivia do
 
   
   def handle_info({:times_up, msg}, state) do 
-    Quiz.finish()
-    pid = :global.whereis_name("slackerton")
+    Trivia.finish(msg.room)
 
     Slackerton.Robot.broadcast(%Message{
-      robot: pid,
+      robot: msg.robot,
       room: msg.room,
-      text: Quiz.display_results(),
+      text: Trivia.display_results(msg.room),
       type: "message"
     })
 

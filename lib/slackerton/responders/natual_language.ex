@@ -2,7 +2,7 @@ defmodule Slackerton.Responders.NaturalLanguage do
   require Logger
 
   alias Hedwig.{Responder}
-  alias Slackerton.Responders.DadJokes
+  alias Slackerton.DadJokes
   alias Slackerton.Normalize
   alias Lex.Runtime.{Response,Request}
 

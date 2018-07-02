@@ -1,4 +1,4 @@
-defmodule Slackerton.Responders.Search.Wikipedia do
+defmodule Slackerton.Search.Wikipedia do
   alias HttpBuilder, as: Http
   require Logger
 

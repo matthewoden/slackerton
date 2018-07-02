@@ -1,5 +1,6 @@
-defmodule Slackerton.Responders.DadJokes.Api do
+defmodule Slackerton.DadJokes.Api do
   import HttpBuilder
+
   @http Application.get_env(:slackerton, :http_adapter, HttpBuilder.Adapters.HTTPoison)
   @json Application.get_env(:slackerton, :json_parser, Jason)
 

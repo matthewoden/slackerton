@@ -6,9 +6,10 @@ defmodule Slackerton.Robot do
   alias Slackerton.Normalize
   alias Lex.Runtime.Conversations
 
-  def handle_connect(%{name: name} = state) do
-    if :undefined == :global.whereis_name(name) do
-      :yes = :global.register_name(name, self())
+  def handle_connect(%{opts: opts} = state) do
+    team = Keyword.get(opts, :team)
+    if :undefined == :global.whereis_name(team) do
+      :yes = :global.register_name(team, self())
     end
 
     {:ok, state}
@@ -43,8 +44,7 @@ defmodule Slackerton.Robot do
   end
 
   def broadcast(msg) do
-    pid = :global.whereis_name("slackerton")
-    Hedwig.Robot.send(pid, msg)
+    Hedwig.Robot.send(msg.robot, msg)
   end
 
   def thread(msg, response, options \\ []) 

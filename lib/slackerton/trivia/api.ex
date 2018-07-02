@@ -1,4 +1,4 @@
-defmodule Slackerton.Responders.Trivia.Api do
+defmodule Slackerton.Trivia.Api do
   import HttpBuilder
   require Logger
   @http Application.get_env(:slackerton, :http_adapter, HttpBuilder.Adapters.HTTPoison)
@@ -41,7 +41,7 @@ defmodule Slackerton.Responders.Trivia.Api do
         |> Enum.find(lettered_choices, fn ({_ , choice }) -> URI.decode(correct) == choice end)
         |> elem(0)
 
-      { URI.decode(question), correct, lettered_choices }
+      %{ question: URI.decode(question), correct: correct, choices: lettered_choices }
   end
 
   defp parse_response(result) do
