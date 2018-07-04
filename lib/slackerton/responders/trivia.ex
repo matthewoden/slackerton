@@ -4,42 +4,25 @@ defmodule Slackerton.Responders.Trivia do
   `slap <username> | me
   """
   use Hedwig.Responder
-  alias Hedwig.Message
-  alias Slackerton.Trivia
+  alias Slackerton.{Trivia, Normalize}
 
   @usage """
   pop quiz - Asks a trivia question. Answer with the letters provided.
   """
 
-  hear ~r/^pop quiz/i, %{room: room} = msg do
-    if Trivia.in_quiz(room) do
-      send msg, "One question at a time, please."
-    else
-      Trivia.new(room)
-      Process.send_after(self(), {:times_up, msg}, 15_000)
-      send msg, Trivia.prompt(room)
-    end
+  hear ~r/^pop quiz/i, msg do
+    room = Normalize.room(msg.room)
+    trivia_loop = Trivia.new(room, fn results -> send(msg, results) end)
+
+    send(msg, trivia_loop)
   end
 
-  hear ~r/^a$|^b$|^c$|^d$|^e$/i, %{user: user, text: text, room: room} do
+  hear ~r/^a$|^b$|^c$|^d$|^e$/i, %{user: user, text: text,} = msg do
+    room = Normalize.room(msg.room)
     if Trivia.in_quiz(room) do
       Trivia.answer(room, user, text)
-    else
-      :ok
     end
+    :ok
   end
 
-  
-  def handle_info({:times_up, msg}, state) do 
-    Trivia.finish(msg.room)
-
-    Slackerton.Robot.broadcast(%Message{
-      robot: msg.robot,
-      room: msg.room,
-      text: Trivia.display_results(msg.room),
-      type: "message"
-    })
-
-    {:noreply, state}
-  end
 end

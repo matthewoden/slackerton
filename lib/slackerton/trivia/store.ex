@@ -1,10 +1,15 @@
 defmodule Slackerton.Trivia.Store do
-  use Agent
+  use GenServer
+  require Logger
 
   defstruct [ active: MapSet.new(), recently_asked: MapSet.new(), quiz: Map.new(), winners: Map.new() ]
 
   def start_link(_) do
-    Agent.start_link(fn ->  %__MODULE__{} end, name: __MODULE__)
+    GenServer.start_link(__MODULE__, %__MODULE__{}, name: __MODULE__)
+  end
+
+  def init(state) do
+    {:ok, state }
   end
 
   def start_quiz(room) do
@@ -43,17 +48,49 @@ defmodule Slackerton.Trivia.Store do
 
   def recently_asked?(question), do: get(:recently_asked) |> MapSet.member?(question)
 
-  def finish_quiz(room), do: update_key(:active, &MapSet.delete(&1, room))
-
   defp update_key(key, callback) do
-    Agent.update(__MODULE__, fn state -> Map.update!(state, key, callback) end)
-  end
+    GenServer.call(__MODULE__, {:update, key, callback})
+  end 
 
   defp update(callback) do
-    Agent.update(__MODULE__, fn state -> callback.(state) end)
+    GenServer.call(__MODULE__, {:update, callback})
   end
 
   defp get(key) do
-    Agent.get(__MODULE__, fn state -> Map.get(state, key) end)
+    GenServer.call(__MODULE__, {:get, key})
+  end
+
+  def schedule_completion(room, callback, timeout \\ 15_000) do
+    Logger.info(fn -> {"Scheduling End of Game", [room: room] } end)
+    Process.send_after(__MODULE__, {:times_up, room, callback}, timeout)
+  end
+
+  def handle_info({:times_up, room, callback}, state) do
+    state = Map.update!(state, :active, &MapSet.delete(&1, room))
+    quiz = Map.get(state, :quiz)[room]
+    winners = Map.get(state, :winners)[room]
+    callback.({quiz, winners})
+    {:noreply, state}
+  end
+
+  def handle_info(message, state) do
+    Logger.warn(fn -> { "unhandled message", [message: message] } end)
+    {:noreply, state}
+  end
+
+  def handle_call({:update, key, callback}, _, state) do
+    state = Map.update!(state, key, callback)
+    {:reply, state, state}
+  end
+
+  def handle_call({:update, callback}, _, state) do
+    state = callback.(state)
+    {:reply, state, state}
+
+  end
+
+  def handle_call({:get, key }, _ , state) do
+    value = Map.get(state, key)
+    {:reply, value, state}
   end
 end

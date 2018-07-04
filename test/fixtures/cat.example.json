@@ -1,0 +1,16 @@
+{
+  "year": 1899,
+  "provider": {
+    "name": "wordnik",
+    "id": 711
+  },
+  "rating": 8939.131,
+  "url":
+    "http://api.wordnik.com/v4/mid/d32e5e6e501b3f60a78301cff9b15d9d5f8dd801afa6bebe188982a42466bb5b",
+  "word": "cat",
+  "text":
+    "In a subsequent passage, \"I am as melancholy as a gibb'd cat\" -- we are told that _cat_ is not the domestic animal of that name, but a contraction of _catin_, a woman of the town.",
+  "documentId": 18094183,
+  "exampleId": 1185868246,
+  "title": "Famous Reviews"
+}

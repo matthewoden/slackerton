@@ -2,9 +2,22 @@ defmodule Slackerton.Trivia do
   alias Slackerton.Trivia.{Api, Store}
   alias Slackerton.Normalize
 
-  def new(room) do
-    Store.start_quiz(room)
-    Store.add_questions_to_quiz(room, get_new_quiz())
+  def new(room, on_complete) do
+    if in_quiz(room) do
+      "One question at a time, please."
+    else
+      Store.start_quiz(room)
+      Store.add_questions_to_quiz(room, get_new_quiz())
+      Store.schedule_completion(
+        room, 
+        fn results -> 
+          on_complete.(display_results(results)) 
+        end, 
+        15_000
+      )
+
+      display_prompt(room)
+    end
   end
 
   def get_new_quiz() do
@@ -18,7 +31,7 @@ defmodule Slackerton.Trivia do
 
   end
 
-  def prompt(room) do
+  def display_prompt(room) do
     %{ question: question, choices: choices } = Store.get_quiz(room)
 
     choice_list = 
@@ -45,9 +58,8 @@ defmodule Slackerton.Trivia do
   def answer(room, %{id: user}, answer), do: Store.answer_quiz(room, user, answer)
   def answer(room, user, answer), do: Store.answer_quiz(room, user, answer)
 
-  def display_results(room) do
-    quiz = Store.get_quiz(room)
-    winners = Store.get_winners(room) |> MapSet.to_list() |> format_winners()
+  def display_results({quiz, winners}) do
+    winners =  MapSet.to_list(winners) |> format_winners()
 
     """
     Times Up!
@@ -65,8 +77,7 @@ defmodule Slackerton.Trivia do
     |> Enum.join(", ")
   end
 
-  def finish(room), do: Store.finish_quiz(room)
-
   def in_quiz(room), do: Store.active?(room)
     
+
 end

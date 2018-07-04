@@ -1,0 +1,15 @@
+[
+  {
+    "commentCount": 0,
+    "createdBy": "ahd",
+    "createdAt": "2009-03-15T15:32:01.000+0000",
+    "id": 9904,
+    "word": "cat",
+    "duration": 0.78,
+    "audioType": "pronunciation",
+    "attributionText":
+      "from The American Heritage® Dictionary of the English Language, 4th Edition",
+    "fileUrl":
+      "http://api.wordnik.com/v4/audioFile.mp3/c4502f2f96b67dd94bb80ba719831ad8045c8b2d54fa8d410b6178b1e4dac3ed"
+  }
+]

@@ -26,7 +26,53 @@ slackerton:
 
 ---
 
-### Trivia
+### Natural Language Support (Dad Jokes)
+
+If you talk directly to the bot, it has some level of natural language support.
+
+Currently, supports the following actions:
+
+#### News Report
+
+Gets the latest breaking news about a subject?
+
+```
+matthewoden: hey doc whats the latest on the trade war?
+slackerton:
+*Asian shares slip on trade war anxiety, yuan steadies*
+Hideyuki Sano, Reuters - Wednesday, July 4, 2018
+
+Asian stocks slipped on Wednesday on the specter of a Sino-U.S. trade war ahead of an end-of-week deadline for U.S. tariffs on $34 billion worth of Chinese imports while the yuan stabilized after China's central bank moved to calm nervous investors.
+http://feeds.reuters.com/~r/reuters/topNews/~3/9e4RbwNEHUw/asian-shares-slip-on-trade-war-anxiety-yuan-steadies-idUSKBN1JU03V
+```
+
+#### Terrible dad jokes
+
+"Tell me a joke", "Tell me something funny", "Tell me a dog joke", etc.
+
+Powered by icanhazdadjoke.com
+
+```
+matthewoden: hey doc tell me a carrots joke
+slackerton: What did celery say when he broke up with his girlfriend? She wasn't right for me, so I really don't carrot all.
+```
+
+### Spelling Bee (Definitons, Pronunciations, Examples of use)
+
+"What does WORD mean?", "How do you say WORD?", "Can you use WORD in a sentence?"
+
+Powered by Wordnik.
+
+```
+matthewoden: hey doc define cat
+slackerton:
+Cat, noun
+1. A small carnivorous mammal (Felis catus or F. domesticus) domesticated since early times as a catcher of rats and mice and as a pet and existing in several distinctive breeds and varieties.
+2. Any of various other carnivorous mammals of the family Felidae, which includes the lion, tiger, leopard, and lynx.
+3. The fur of a domestic cat.
+```
+
+#### Trivia
 
 Runs a single round of trivia. Once the question is posted, you have 15 seconds to respond. Answers are case insensitive.
 
@@ -54,20 +100,17 @@ The answer was: D
 Winners for this round: ...Nobody!
 ```
 
----
-
-### Natural Language Parser (Dad Jokes)
-
-Parses language, and decides an action. Currently, only returns terrible dad jokes, but eventually all responders will work through it. Runs on my library for [AWS Lex](https://github.com/matthewoden/lex)
-
-```
-matthewoden: hey doc tell me a carrots joke
-slackerton: What did celery say when he broke up with his girlfriend? She wasn't right for me, so I really don't carrot all.
-```
+but eventually all responders will work through it. Runs on my library for [AWS Lex](https://github.com/matthewoden/lex)
 
 ---
 
-### More Dad Jokes
+### Trivia (Supplemental)
+
+As noted above, but can be invoked by saying "pop quiz"
+
+---
+
+### Dad Jokes (Supplemental)
 
 Listens for any use of `"I'm <phrase>"`, and greets the user as if that phrase was their name. Runs randomly, so not every use will trigger it.
 

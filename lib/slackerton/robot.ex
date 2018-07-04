@@ -61,4 +61,8 @@ defmodule Slackerton.Robot do
     broadcast(%{msg | text: response })
   end
 
+  def send(msg, text) do
+    broadcast(Map.merge(msg, %{ text: text }))
+  end
+
 end

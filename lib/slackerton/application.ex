@@ -4,6 +4,7 @@ defmodule Slackerton.Application do
   @moduledoc false
 
   use Application
+  import Supervisor.Spec, warn: false
 
   def start(_type, _args) do
     # List all child processes to be supervised
@@ -16,6 +17,7 @@ defmodule Slackerton.Application do
     }
 
     children = [
+      supervisor(Slackerton.Cache, []),
       {Slackerton.Trivia.Store, []},
       {Lex, lex_config},
       robot_worker({"dnd", System.get_env("SLACKERTON_DND_SLACK_TOKEN") }),
