@@ -34,7 +34,9 @@ Currently, supports the following actions:
 
 #### News Report
 
-Gets the latest breaking news about a subject?
+Gets the latest breaking news about a subject.
+
+See a full list of [news sources](NEWSSOURCES.md)
 
 ```
 matthewoden: hey doc whats the latest on the trade war?

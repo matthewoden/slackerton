@@ -28,6 +28,23 @@ defmodule Slackerton.Persisted do
     Dynamo.get_item(table, lookup) |> ExAws.request! |> Map.get("Item")
   end
 
+  def query(table, options) do
+    options = 
+      [
+        limit: options.limit,
+        expression_attribute_values: options.params,
+        key_condition_expression: options.expression,
+      ] 
+      |> Enum.filter(
+          fn
+            ({k, nil}) -> false 
+            _ -> true
+          end
+        )
+
+    Dynamo.query(table, options)
+  end
+
 
   #
   # Callbacks

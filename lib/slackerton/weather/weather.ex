@@ -4,13 +4,21 @@ defmodule Slackerton.Weather do
 
   def severe_weather() do
     # Cache.get_or_else()
-    # case Api.severe_weather() do
-    #   { :ok, results }
-    # end
+    case Api.severe_weather() do
+      { :ok, [ alert | rest ] } ->
+        Cache.set({__MODULE__, :latest_alert}, alert)
+        {:ok, formatted } = format_headline(alert)
+      _ ->
+        {:error, :no_updates}
+    end
   end
 
+  def format_headline(%{ "headline" => headline }) do
+    """
+    #{headline}
 
-  def cache_result(%{"id" => id }) do
-    Cache.set("weather", "alert", id)
+    For full alert information, ask me about severe weather.
+    """
   end
+
 end
