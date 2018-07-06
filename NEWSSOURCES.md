@@ -5,7 +5,7 @@ News updates are sourced from the following:
 ```json
 [
   {
-    "id": "",
+    "id": "abc-news",
     "name": "ABC News",
     "description":
       "Your trusted source for breaking news, analysis, exclusive interviews, headlines, and videos at ABCNews.com.",
@@ -15,7 +15,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "abc-news-au",
     "name": "ABC News (AU)",
     "description":
       "Australia's most trusted source of local, national and world news. Comprehensive, independent, in-depth analysis, the latest business, sport, weather and more.",
@@ -25,7 +25,7 @@ News updates are sourced from the following:
     "country": "au"
   },
   {
-    "id": "",
+    "id": "al-jazeera-english",
     "name": "Al Jazeera English",
     "description":
       "News, analysis from the Middle East and worldwide, multimedia and interactives, opinions, documentaries, podcasts, long reads and broadcast schedule.",
@@ -35,7 +35,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "ars-technica",
     "name": "Ars Technica",
     "description":
       "The PC enthusiast's resource. Power users and the tools they love, without computing religion.",
@@ -45,7 +45,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "associated-press",
     "name": "Associated Press",
     "description":
       "The AP delivers in-depth coverage on the international, politics, lifestyle, business, and entertainment news.",
@@ -55,7 +55,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "axios",
     "name": "Axios",
     "description":
       "Axios are a new media company delivering vital, trustworthy news and analysis in the most efficient, illuminating and shareable ways possible.",
@@ -65,7 +65,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "bbc-news",
     "name": "BBC News",
     "description":
       "Use BBC News for up-to-the-minute news, breaking news, video, audio and feature stories. BBC News provides trusted World and UK news as well as local and regional perspectives. Also entertainment, business, science, technology and health news.",
@@ -75,7 +75,7 @@ News updates are sourced from the following:
     "country": "gb"
   },
   {
-    "id": "",
+    "id": "business-insider",
     "name": "Business Insider",
     "description":
       "Business Insider is a fast-growing business site with deep financial, media, tech, and other industry verticals. Launched in 2007, the site is now the largest business news site on the web.",
@@ -85,7 +85,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "business-insider-uk",
     "name": "Business Insider (UK)",
     "description":
       "Business Insider is a fast-growing business site with deep financial, media, tech, and other industry verticals. Launched in 2007, the site is now the largest business news site on the web.",
@@ -95,7 +95,7 @@ News updates are sourced from the following:
     "country": "gb"
   },
   {
-    "id": "",
+    "id": "buzzfeed",
     "name": "Buzzfeed",
     "description":
       "BuzzFeed is a cross-platform, global network for news and entertainment that generates seven billion views each month.",
@@ -105,7 +105,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "cbc-news",
     "name": "CBC News",
     "description":
       "CBC News is the division of the Canadian Broadcasting Corporation responsible for the news gathering and production of news programs on the corporation's English-language operations, namely CBC Television, CBC Radio, CBC News Network, and CBC.ca.",
@@ -115,7 +115,7 @@ News updates are sourced from the following:
     "country": "ca"
   },
   {
-    "id": "",
+    "id": "cbs-news",
     "name": "CBS News",
     "description":
       "CBS News: dedicated to providing the best in journalism under standards it pioneered at the dawn of radio and television and continue in the digital age.",
@@ -125,7 +125,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "cnbc",
     "name": "CNBC",
     "description":
       "Get latest business news on stock markets, financial & earnings on CNBC. View world markets streaming charts & video; check stock tickers and quotes.",
@@ -135,7 +135,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "cnn",
     "name": "CNN",
     "description":
       "View the latest news and breaking news today for U.S., world, weather, entertainment, politics and health at CNN",
@@ -145,7 +145,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "engadget",
     "name": "Engadget",
     "description":
       "Engadget is a web magazine with obsessive daily coverage of everything new in gadgets and consumer electronics.",
@@ -155,7 +155,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "financial-times",
     "name": "Financial Times",
     "description":
       "The latest UK and international business, finance, economic and political news, comment and analysis from the Financial Times on FT.com.",
@@ -166,7 +166,7 @@ News updates are sourced from the following:
   },
 
   {
-    "id": "",
+    "id": "google-news",
     "name": "Google News",
     "description":
       "Comprehensive, up-to-date news coverage, aggregated from sources all over the world by Google News.",
@@ -176,7 +176,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "google-news-au",
     "name": "Google News (Australia)",
     "description":
       "Comprehensive, up-to-date Australia news coverage, aggregated from sources all over the world by Google News.",
@@ -186,7 +186,7 @@ News updates are sourced from the following:
     "country": "au"
   },
   {
-    "id": "",
+    "id": "google-news-ca",
     "name": "Google News (Canada)",
     "description":
       "Comprehensive, up-to-date Canada news coverage, aggregated from sources all over the world by Google News.",
@@ -196,7 +196,7 @@ News updates are sourced from the following:
     "country": "ca"
   },
   {
-    "id": "",
+    "id": "google-news-in",
     "name": "Google News (India)",
     "description":
       "Comprehensive, up-to-date India news coverage, aggregated from sources all over the world by Google News.",
@@ -206,7 +206,7 @@ News updates are sourced from the following:
     "country": "in"
   },
   {
-    "id": "",
+    "id": "google-news-uk",
     "name": "Google News (UK)",
     "description":
       "Comprehensive, up-to-date UK news coverage, aggregated from sources all over the world by Google News.",
@@ -216,7 +216,7 @@ News updates are sourced from the following:
     "country": "gb"
   },
   {
-    "id": "",
+    "id": "hacker-news",
     "name": "Hacker News",
     "description":
       "Hacker News is a social news website focusing on computer science and entrepreneurship. It is run by Paul Graham's investment fund and startup incubator, Y Combinator. In general, content that can be submitted is defined as \"anything that gratifies one's intellectual curiosity\".",
@@ -226,7 +226,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "ign",
     "name": "IGN",
     "description":
       "IGN is your site for Xbox One, PS4, PC, Wii-U, Xbox 360, PS3, Wii, 3DS, PS Vita and iPhone games with expert reviews, news, previews, trailers, cheat codes, wiki guides and walkthroughs.",
@@ -236,7 +236,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "mashable",
     "name": "Mashable",
     "description":
       "Mashable is a global, multi-platform media and entertainment company.",
@@ -246,7 +246,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "medical-news-today",
     "name": "Medical News Today",
     "description":
       "Medical news and health news headlines posted throughout the day, every day.",
@@ -256,7 +256,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "metro",
     "name": "Metro",
     "description":
       "News, Sport, Showbiz, Celebrities from Metro - a free British newspaper.",
@@ -266,7 +266,7 @@ News updates are sourced from the following:
     "country": "gb"
   },
   {
-    "id": "",
+    "id": "mirror",
     "name": "Mirror",
     "description":
       "All the latest news, sport and celebrity gossip at Mirror.co.uk. Get all the big headlines, pictures, analysis, opinion and video on the stories that matter to you.",
@@ -276,7 +276,7 @@ News updates are sourced from the following:
     "country": "gb"
   },
   {
-    "id": "",
+    "id": "msnbc",
     "name": "MSNBC",
     "description":
       "Breaking news and in-depth analysis of the headlines, as well as commentary and informed perspectives from The Rachel Maddow Show, Morning Joe & more.",
@@ -286,7 +286,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "mtv-news",
     "name": "MTV News",
     "description":
       "The ultimate news source for music, celebrity, entertainment, movies, and current events on the web. It's pop culture on steroids.",
@@ -296,7 +296,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "mtv-news-uk",
     "name": "MTV News (UK)",
     "description":
       "All the latest celebrity news, gossip, exclusive interviews and pictures from the world of music and entertainment.",
@@ -306,7 +306,7 @@ News updates are sourced from the following:
     "country": "gb"
   },
   {
-    "id": "",
+    "id": "national-geographic",
     "name": "National Geographic",
     "description":
       "Reporting our world daily: original nature and science news from National Geographic.",
@@ -316,7 +316,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "nbc-news",
     "name": "NBC News",
     "description":
       "Breaking news, videos, and the latest top stories in world news, business, politics, health and pop culture.",
@@ -326,7 +326,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "news24",
     "name": "News24",
     "description":
       "South Africa's premier news source, provides breaking news on national, world, Africa, sport, entertainment, technology and more.",
@@ -336,7 +336,7 @@ News updates are sourced from the following:
     "country": "za"
   },
   {
-    "id": "",
+    "id": "new-scientist",
     "name": "New Scientist",
     "description":
       "Breaking science and technology news from around the world. Exclusive stories and expert analysis on space, technology, health, physics, life and Earth.",
@@ -346,7 +346,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "news-com-au",
     "name": "News.com.au",
     "description":
       "We say what people are thinking and cover the issues that get people talking balancing Australian and global moments — from politics to pop culture.",
@@ -356,7 +356,7 @@ News updates are sourced from the following:
     "country": "au"
   },
   {
-    "id": "",
+    "id": "newsweek",
     "name": "Newsweek",
     "description":
       "Newsweek provides in-depth analysis, news and opinion about international issues, technology, business, culture and politics.",
@@ -366,7 +366,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "new-york-magazine",
     "name": "New York Magazine",
     "description":
       "NYMAG and New York magazine cover the new, the undiscovered, the next in politics, culture, food, fashion, and behavior nationally, through a New York lens.",
@@ -376,7 +376,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "next-big-future",
     "name": "Next Big Future",
     "description":
       "Coverage of science and technology that have the potential for disruption, and analysis of plans, policies, and technology that enable radical improvement.",
@@ -386,7 +386,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "politico",
     "name": "Politico",
     "description":
       "Political news about Congress, the White House, campaigns, lobbyists and issues.",
@@ -396,7 +396,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "polygon",
     "name": "Polygon",
     "description":
       "Polygon is a gaming website in partnership with Vox Media. Our culture focused site covers games, their creators, the fans, trending stories and entertainment news.",
@@ -406,7 +406,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "recode",
     "name": "Recode",
     "description":
       "Get the latest independent tech news, reviews and analysis from Recode with the most informed and respected journalists in technology and media.",
@@ -416,7 +416,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "reddit-r-all",
     "name": "Reddit /r/all",
     "description":
       "Reddit is an entertainment, social news networking service, and news website. Reddit's registered community members can submit content, such as text posts or direct links.",
@@ -426,7 +426,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "reuters",
     "name": "Reuters",
     "description":
       "Reuters.com brings you the latest news from around the world, covering breaking news in business, politics, entertainment, technology, video and pictures.",
@@ -436,7 +436,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "rte",
     "name": "RTE",
     "description":
       "Get all of the latest breaking local and international news stories as they happen, with up to the minute updates and analysis, from Ireland's National Broadcaster.",
@@ -446,7 +446,7 @@ News updates are sourced from the following:
     "country": "ie"
   },
   {
-    "id": "",
+    "id": "techcrunch",
     "name": "TechCrunch",
     "description":
       "TechCrunch is a leading technology media property, dedicated to obsessively profiling startups, reviewing new Internet products, and breaking tech news.",
@@ -456,7 +456,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "techradar",
     "name": "TechRadar",
     "description":
       "The latest technology news and reviews, covering computing, home entertainment systems, gadgets and more.",
@@ -466,7 +466,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "the-economist",
     "name": "The Economist",
     "description":
       "The Economist offers authoritative insight and opinion on international news, politics, business, finance, science, technology and the connections between them.",
@@ -476,7 +476,7 @@ News updates are sourced from the following:
     "country": "gb"
   },
   {
-    "id": "",
+    "id": "the-globe-and-mail",
     "name": "The Globe And Mail",
     "description":
       "The Globe and Mail offers the most authoritative news in Canada, featuring national and international news.",
@@ -486,7 +486,7 @@ News updates are sourced from the following:
     "country": "ca"
   },
   {
-    "id": "",
+    "id": "the-guardian-au",
     "name": "The Guardian (AU)",
     "description":
       "Latest news, sport, comment, analysis and reviews from Guardian Australia",
@@ -496,7 +496,7 @@ News updates are sourced from the following:
     "country": "au"
   },
   {
-    "id": "",
+    "id": "the-guardian-uk",
     "name": "The Guardian (UK)",
     "description":
       "Latest news, sport, business, comment, analysis and reviews from the Guardian, the world's leading liberal voice.",
@@ -506,7 +506,7 @@ News updates are sourced from the following:
     "country": "gb"
   },
   {
-    "id": "",
+    "id": "the-hill",
     "name": "The Hill",
     "description":
       "The Hill is a top US political website, read by the White House and more lawmakers than any other site -- vital for policy, politics and election campaigns.",
@@ -516,7 +516,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "the-hindu",
     "name": "The Hindu",
     "description":
       "The Hindu. latest news, analysis, comment, in-depth coverage of politics, business, sport, environment, cinema and arts from India's national newspaper.",
@@ -526,7 +526,7 @@ News updates are sourced from the following:
     "country": "in"
   },
   {
-    "id": "",
+    "id": "the-huffington-post",
     "name": "The Huffington Post",
     "description":
       "The Huffington Post is a politically liberal American online news aggregator and blog that has both localized and international editions founded by Arianna Huffington, Kenneth Lerer, Andrew Breitbart, and Jonah Peretti, featuring columnists.",
@@ -536,7 +536,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "the-irish-times",
     "name": "The Irish Times",
     "description":
       "The Irish Times online. Latest news including sport, analysis, business, weather and more from the definitive brand of quality news in Ireland.",
@@ -546,7 +546,7 @@ News updates are sourced from the following:
     "country": "ie"
   },
   {
-    "id": "",
+    "id": "the-jerusalem-post",
     "name": "The Jerusalem Post",
     "description":
       "The Jerusalem Post is the leading online newspaper for English speaking Jewry since 1932, bringing news and updates from the Middle East and all over the Jewish world.",
@@ -556,7 +556,7 @@ News updates are sourced from the following:
     "country": "is"
   },
   {
-    "id": "",
+    "id": "the-new-york-times",
     "name": "The New York Times",
     "description":
       "The New York Times: Find breaking news, multimedia, reviews & opinion on Washington, business, sports, movies, travel, books, jobs, education, real estate, cars & more at nytimes.com.",
@@ -566,7 +566,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "the-next-web",
     "name": "The Next Web",
     "description":
       "The Next Web is one of the world’s largest online publications that delivers an international perspective on the latest news about Internet technology, business and culture.",
@@ -576,7 +576,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "the-telegraph",
     "name": "The Telegraph",
     "description":
       "Latest news, business, sport, comment, lifestyle and culture from the Daily Telegraph and Sunday Telegraph newspapers and video from Telegraph TV.",
@@ -586,7 +586,7 @@ News updates are sourced from the following:
     "country": "gb"
   },
   {
-    "id": "",
+    "id": "the-times-of-india",
     "name": "The Times of India",
     "description":
       "Times of India brings the Latest News and Top Breaking headlines on Politics and Current Affairs in India and around the World, Sports, Business, Bollywood News and Entertainment, Science, Technology, Health and Fitness news, Cricket and opinions from leading columnists.",
@@ -596,7 +596,7 @@ News updates are sourced from the following:
     "country": "in"
   },
   {
-    "id": "",
+    "id": "the-verge",
     "name": "The Verge",
     "description":
       "The Verge covers the intersection of technology, science, art, and culture.",
@@ -606,7 +606,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "the-wall-street-journal",
     "name": "The Wall Street Journal",
     "description":
       "WSJ online coverage of breaking news and current headlines from the US and around the world. Top stories, photos, videos, detailed analysis and in-depth reporting.",
@@ -616,7 +616,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "the-washington-post",
     "name": "The Washington Post",
     "description":
       "Breaking news and analysis on politics, business, world national news, entertainment more. In-depth DC, Virginia, Maryland news coverage including traffic, weather, crime, education, restaurant reviews and more.",
@@ -626,7 +626,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "the-washington-times",
     "name": "The Washington Times",
     "description":
       "The Washington Times delivers breaking news and commentary on the issues that affect the future of our nation.",
@@ -636,7 +636,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "time",
     "name": "Time",
     "description":
       "Breaking news and analysis from TIME.com. Politics, world news, photos, video, tech reviews, health, science and entertainment news.",
@@ -646,7 +646,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "usa-today",
     "name": "USA Today",
     "description":
       "Get the latest national, international, and political news at USATODAY.com.",
@@ -656,7 +656,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "vice-news",
     "name": "Vice News",
     "description":
       "Vice News is Vice Media, Inc.'s current affairs channel, producing daily documentary essays and video through its website and YouTube channel. It promotes itself on its coverage of \"under - reported stories\".",
@@ -666,7 +666,7 @@ News updates are sourced from the following:
     "country": "us"
   },
   {
-    "id": "",
+    "id": "wired",
     "name": "Wired",
     "description":
       "Wired is a monthly American magazine, published in print and online editions, that focuses on how emerging technologies affect culture, the economy, and politics.",
