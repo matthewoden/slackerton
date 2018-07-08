@@ -59,6 +59,20 @@ matthewoden: hey doc, who's in charge around here
 slackerton: The current admins: @matthewoden, @jeremy
 ```
 
+#### General Knowledge
+
+Basic, googleable items. Grabs a summary from wikipedia.
+
+"What is X?" "Who is Y?" "Where is Z?"
+
+```
+matthewoden: hey doc what is an ocelot?
+slackerton:
+*Ocelot*
+The ocelot is a wild cat native to the southwestern United States, Mexico, Central and South America. It is listed as Least Concern on the IUCN Red List as the population is estimated to comprise more than 40,000 mature individuals and is considered stable. Its fur was once regarded as particularly valuable, but legal trade of i
+ts fur ceased decades ago.
+```
+
 #### News Report
 
 Gets the latest breaking news about a subject.
@@ -73,6 +87,9 @@ Hideyuki Sano, Reuters - Wednesday, July 4, 2018
 
 Asian stocks slipped on Wednesday on the specter of a Sino-U.S. trade war ahead of an end-of-week deadline for U.S. tariffs on $34 billion worth of Chinese imports while the yuan stabilized after China's central bank moved to calm nervous investors.
 http://feeds.reuters.com/~r/reuters/topNews/~3/9e4RbwNEHUw/asian-shares-slip-on-trade-war-anxiety-yuan-steadies-idUSKBN1JU03V
+
+matthewoden: hey doc whats the latest news on the trade war
+slackerton: Sorry, I don't have anything new about that.
 ```
 
 #### Terrible dad jokes
