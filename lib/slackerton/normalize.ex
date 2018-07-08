@@ -1,5 +1,7 @@
 defmodule Slackerton.Normalize do
-  
+  @moduledoc """
+  Normalizes differences between Hedwig Adapters
+  """
   def to_user_string(user) when is_binary(user), do: "<@#{user}>"  
   def to_user_string(%{id: id}), do: "<@#{id}>" 
 
