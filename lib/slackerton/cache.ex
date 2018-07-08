@@ -5,7 +5,6 @@ defmodule Slackerton.Cache do
   """
   use Nebulex.Cache, otp_app: :slackerton
   alias Slackerton.Cache
-  alias Slackerton.Persist
 
   def get_or_else(key, fun, options \\ []) do
     Cache.get(key) || Cache.set(key, fun.(), ttl: Keyword.get(options, :ttl, 86400))

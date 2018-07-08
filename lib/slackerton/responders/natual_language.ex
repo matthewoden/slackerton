@@ -37,9 +37,9 @@ defmodule Slackerton.Responders.NaturalLanguage do
 
       "GetNews" -> NewsResolver.latest_news(msg, slots)
 
-      "AddAdmin" -> UserResolver.add_admin(msg, slots)
+      "AddAdmin" -> UserResolver.create_admin(msg, slots)
 
-      "RemoveAdmin" -> UserResolver.remove_admin(msg, slots)
+      "RemoveAdmin" -> UserResolver.delete_admin(msg, slots)
       
       "ListAdmin" -> UserResolver.list_admins(msg, slots)
 

@@ -19,8 +19,6 @@ defmodule Slackerton.Weather do
     end
   end
 
-  def filter_alerts(new_alerts, old_alerts) do
-  end
 
   def severe_weather_full() do
     case Cache.get({__MODULE__, :latest_alert}) do

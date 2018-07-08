@@ -15,9 +15,11 @@ defmodule Slackerton.UserResolver do
   ]
 
   def create_admin(msg, %{ "User" => user}) do
-    if User.is_admin?(msg.user) do
-      team = Map.get(msg.private, "team", "default") 
-      user = String.trim_leading(user, "@")
+    team = Normalize.to_team_id(msg)
+    caller = Normalize.to_user_string(user)
+    user = String.trim_leading(user, "@")
+
+    if User.is_admin?(caller, team) do
       User.set_admin(user, team, true)
       
       Responder.reply(msg, "Ok, I've made #{user} an admin.")
@@ -27,8 +29,11 @@ defmodule Slackerton.UserResolver do
   end
 
   def delete_admin(msg, %{ "User" => user}) do
-    if User.is_admin?(msg.user) do
-      team = get_team(msg)
+    team = Normalize.to_team_id(msg)
+    caller = Normalize.to_user_string(user)
+    user = String.trim_leading(user, "@")
+
+    if User.is_admin?(caller, team) do
       user = String.trim_leading(user, "@")
       User.set_admin(user, team, false)
       
@@ -41,7 +46,7 @@ defmodule Slackerton.UserResolver do
   def list_admins(msg, _) do
     admin_list =
       msg
-      |> get_team()
+      |> Normalize.to_team_id()
       |> User.list_admins()
 
     case admin_list do
@@ -59,8 +64,5 @@ defmodule Slackerton.UserResolver do
         Responder.reply(msg, "Sorry, I couldn't get the complete admin list at this time.")
     end
   end
-
-  defp get_team(%{private: %{ "team" => team }}), do: team
-  defp get_team(_), do: "default"
 
 end

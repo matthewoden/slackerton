@@ -1,7 +1,6 @@
 defmodule Slackerton.User do
   alias ExAws.Dynamo
   alias Slackerton.User.Repo
-  alias Slackerton.Cache
   require Logger
   
   @derive [Dynamo.Encodable]

@@ -89,7 +89,7 @@ defmodule Slackerton.User.Repo do
 
       users = 
         Enum.map(result, fn user -> 
-            user = Dynamo.decode_item(user, as: __MODULE__) |> cache()
+          Dynamo.decode_item(user, as: __MODULE__) |> cache()
         end)
       
       { :ok, users }

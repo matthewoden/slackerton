@@ -1,8 +1,11 @@
 defmodule Slackerton.Normalize do
   
   def to_user_string(user) when is_binary(user), do: "<@#{user}>"  
-
   def to_user_string(%{id: id}), do: "<@#{id}>" 
+
+  def to_team_id(%{private: %{ "team" => team }}), do: team
+  def to_team_id(_), do: "default"
+
 
   def room(nil), do: "default"
   def room(room), do: room

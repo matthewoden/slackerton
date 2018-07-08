@@ -4,8 +4,6 @@ defmodule Slackerton.Robot do
 
   alias Hedwig.Message
   alias Slackerton.Responders.NaturalLanguage
-  alias Slackerton.{Normalize, Dispatcher, Cache}
-  alias Lex.Runtime.Conversations
 
   def handle_connect(%{opts: opts} = state) do
     team = Keyword.get(opts, :team)
