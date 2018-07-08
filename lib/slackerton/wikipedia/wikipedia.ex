@@ -9,17 +9,17 @@ defmodule Slackerton.Wikipedia do
     end
   end
 
-
   def summarize(query) do
     case Api.summarize(query) do
       {:ok, %{ title: title, extract: extract }} ->
         """
+
         *#{title}*
         #{extract}
         """
 
        _ ->
-        "I have no idea." 
+        "Sorry, I don't know about that." 
     end
   end
 

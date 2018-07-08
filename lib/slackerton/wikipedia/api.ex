@@ -64,8 +64,8 @@ defmodule Slackerton.Wikipedia.Api do
     summarize(String.replace(value, "%2B","_"), true, false, count + 1)
   end
   
-  defp handle_response(response) do
-    Logger.error(IO.inspect(response))
+  defp handle_response(response, _) do
+    Logger.debug("Wikipedia Request - Not Found")
     {:error, :not_enough_info}
   end
 end
