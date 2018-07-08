@@ -1,13 +1,10 @@
 defmodule Slackerton.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
   @moduledoc false
 
   use Application
   import Supervisor.Spec, warn: false
 
   def start(_type, _args) do
-    # List all child processes to be supervised
 
     lex_config = %{
       aws_access_key_id: System.get_env("SLACKERTON_AWS_ACCESS_KEY_ID"),
@@ -20,6 +17,7 @@ defmodule Slackerton.Application do
       supervisor(Slackerton.Cache, []),
       {Slackerton.Trivia.Store, []},
       {Lex, lex_config},
+      worker(Slackerton.User.CacheWarmer, [], [restart: :temporary]),
       robot_worker({"dnd", System.get_env("SLACKERTON_DND_SLACK_TOKEN") }),
     ]
 

@@ -2,8 +2,9 @@ defmodule Slackerton.Robot do
   require Logger
   use Hedwig.Robot, otp_app: :slackerton
 
+  alias Hedwig.Message
   alias Slackerton.Responders.NaturalLanguage
-  alias Slackerton.Normalize
+  alias Slackerton.{Normalize, Dispatcher, Cache}
   alias Lex.Runtime.Conversations
 
   def handle_connect(%{opts: opts} = state) do
@@ -20,22 +21,7 @@ defmodule Slackerton.Robot do
   end
 
   def handle_in(%Hedwig.Message{} = msg, state) do
-
-    user = NaturalLanguage.user(msg)
-    context = NaturalLanguage.context(msg)
-    
-    if Conversations.in_conversation?(user, context) do
-      Logger.debug("IN CONVERSATION > #{user} #{context}")
-
-      input = 
-        msg.text
-        |> String.trim()
-        |> Normalize.decode_characters()
-
-      NaturalLanguage.put_text(input, user, context) 
-      |> NaturalLanguage.converse(msg)
-    end
-
+    NaturalLanguage.handle_conversations(msg)
     {:dispatch, msg, state}
   end
 

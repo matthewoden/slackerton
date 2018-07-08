@@ -21,6 +21,10 @@ config :slackerton, Slackerton.Robot,
     {Slackerton.Responders.DadJokes, []},
     {Slackerton.Responders.Trivia, []},
     {Slackerton.Responders.Calculate, []}
+  ],
+  plugs: [
+    {Slackerton.Auth, []},
+    {Slackerton.Responders.NaturalLanguage, []}
   ]
 
 config :slackerton, 

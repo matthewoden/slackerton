@@ -8,7 +8,7 @@ defmodule Slackerton.Cache do
   alias Slackerton.Persist
 
   def get_or_else(key, fun, options \\ []) do
-    Cache.get(key) || Cache.set(key, fun.(), ttl: Keyword.get(options, :ttl, 3600))
+    Cache.get(key) || Cache.set(key, fun.(), ttl: Keyword.get(options, :ttl, 86400))
   end
 
 end

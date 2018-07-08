@@ -40,7 +40,11 @@ defmodule Slackerton.Weather.Api do
   end
 
   defp parse_response({:ok, %{status_code: 200, body: body}}) do    
-    alerts = @json.decode!(body) |> Map.get("@graph")
+    alerts = 
+      @json.decode!(body) 
+      |> Map.get("@graph")
+      |> Enum.map(&Map.take(&1, ["id", "headline", "description"]))
+      
     {:ok, alerts}
   end
 

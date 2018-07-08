@@ -5,12 +5,12 @@ defmodule Slackerton.News do
   def latest_for(query) do
     latest = Cache.get({__MODULE__, :latest})
     case Api.latest_for(query) do
-      {:ok, %{ "articles" => [%{"title" => title } = article] }} 
+      {:ok, [ %{"title" => title } = article | _rest ] }
         when title != latest ->
           Cache.set({__MODULE__, :latest}, title, [ttl: 86400])
           article_markdown(article)
 
-      {:ok, %{ "articles" => articles }} ->
+      {:ok, %{ "articles" => _ }} ->
         "Sorry, there's nothing new about \"#{query}\" right now."
 
       _ ->

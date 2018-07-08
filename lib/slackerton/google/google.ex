@@ -1,4 +1,4 @@
-defmodule Slackerton.Search.Google do
+defmodule Slackerton.Google do
   alias HttpBuilder, as: Http
   require Logger
   

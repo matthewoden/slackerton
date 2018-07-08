@@ -1,5 +1,5 @@
 defmodule Slackerton.Responders.Search do
-  alias Slackerton.Search.{Google, Wikipedia}
+  alias Slackerton.{Google, Wikipedia}
   use Hedwig.Responder
   
   @usage """

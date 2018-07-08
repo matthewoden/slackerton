@@ -1,9 +1,10 @@
 defmodule Slackerton.Responders.NaturalLanguage do
   require Logger
+  alias Hedwig.Responder
+  alias Lex.Runtime.{Response,Request,Conversations}
+  alias Slackerton.{Normalize, DadJokesResolver, WordnikResolver, TriviaResolver, 
+    NewsResolver, WikipediaResolver, UserResolver}
 
-  alias Hedwig.{Responder}
-  alias Slackerton.{DadJokes,Wordnik,Trivia,News,Normalize}
-  alias Lex.Runtime.{Response,Request}
   use Responder
 
   @usage "hey doc <ask for a joke> - Returns a joke."
@@ -18,6 +19,52 @@ defmodule Slackerton.Responders.NaturalLanguage do
     put_text(input, user(msg), context(msg)) |> converse(msg)
 
     :ok
+  end  
+
+  #todo - turn into some kind of router.
+  def fulfillment(intent, slots, msg) do
+    Logger.debug(inspect({intent, slots}))
+    case intent do
+      "DadJokes" -> DadJokesResolver.tell_joke(msg, slots)
+
+      "DefineWord" -> WordnikResolver.define_word(msg, slots)
+
+      "PronounceWord" -> WordnikResolver.pronounce_word(msg, slots)
+
+      "ExampleWord" -> WordnikResolver.example_word(msg, slots)
+      
+      "TriviaGame" -> TriviaResolver.start_game(msg, slots)
+
+      "GetNews" -> NewsResolver.latest_news(msg, slots)
+
+      "AddAdmin" -> UserResolver.add_admin(msg, slots)
+
+      "RemoveAdmin" -> UserResolver.remove_admin(msg, slots)
+      
+      "ListAdmin" -> UserResolver.list_admins(msg, slots)
+
+      "SummarizeTopic" -> WikipediaResolver.summarize(msg, slots)
+
+      _ ->
+        :ok
+    end
+  end
+
+  def handle_conversations(msg) do
+    userId = user(msg)
+    contextId = context(msg)
+    
+    if Conversations.in_conversation?(userId, contextId) do
+      Logger.debug("IN CONVERSATION > #{userId} #{contextId}")
+
+      input = 
+        msg.text
+        |> String.trim()
+        |> Normalize.decode_characters()
+
+      put_text(input, userId, contextId) 
+      |> converse(msg)
+    end
   end
 
   def put_text(input, user, context) do
@@ -30,18 +77,13 @@ defmodule Slackerton.Responders.NaturalLanguage do
     |> Request.send()
   end
 
-  def context(%{ private: %{ "thread_ts" => context }}), do: context
-  def context(%{ private: %{ "ts" => context }}), do: context
-  def context(_), do: "default"
+  defp context(%{ private: %{ "thread_ts" => context }}), do: context
+  defp context(%{ private: %{ "ts" => context }}), do: context
+  defp context(_), do: "default"
 
-  def user(msg), do: Normalize.user_id(msg.user)
+  defp user(msg), do: Normalize.user_id(msg.user)
 
-  # loop through the main conversational hooks:
-  # - what did you mean?
-  # - did you mean x?
-  # - can you elaborate further on x?
-  # - great, here's x.
-  def converse(response, msg) do
+  defp converse(response, msg) do
     case response do
       %Response.ElicitIntent{ message: message } ->
         Slackerton.Robot.thread(msg, message)
@@ -54,31 +96,9 @@ defmodule Slackerton.Responders.NaturalLanguage do
 
       %Response.ReadyForFulfillment{ intent_name: intent, slots: slots } ->
         fulfillment(intent, slots, msg)
-    end
-  end
 
-  def fulfillment(intent, slots, msg) do
-    Logger.debug(intent)
-    case intent do
-      "DadJokes" ->
-        Slackerton.Robot.thread(msg, DadJokes.Api.get(slots["Genre"]), [reply_broadcast: true])
-
-      "DefineWord" ->
-        Slackerton.Robot.send(msg, Wordnik.define(slots["Word"]))
-
-      "PronounceWord" ->
-        Slackerton.Robot.send(msg, Wordnik.pronounce(slots["Word"]))
-
-      "ExampleWord" ->
-        send(msg, Wordnik.example(slots["Word"]))
-
-      "TriviaGame" ->
-        room = Normalize.room(msg.room)
-        trivia_loop = Trivia.new(room, fn results -> send(msg, results) end)
-        send(msg, trivia_loop)
-
-      "GetNews" ->
-        send(msg, News.latest_for(slots["Topic"]))
+      %Response.Failed{ message: message } ->
+        Slackerton.Robot.thread(msg, message)
     end
   end
 

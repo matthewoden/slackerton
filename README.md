@@ -32,6 +32,33 @@ If you talk directly to the bot, it has some level of natural language support.
 
 Currently, supports the following actions:
 
+#### Admin Controls
+
+Allows for Admin-limited controls, based on a list of users stored in Dynamo. Admins are namespaced to the current slack workspace. (in case that ever matters)
+
+Possible actions:
+
+- add an admin\*
+- remove an admin\*
+- list admins
+
+\*indicates an action that requires elevated privledges.
+
+```
+matthewoden: hey doc add @jeremy as an admin
+slackerton: @matthewoden Ok, I've made @jeremy and admin
+```
+
+```
+matthewoden: hey doc remove superuser from @jeremy
+slackerton: @matthewoden Ok, I've removed @jeremy from the list of admins
+```
+
+```
+matthewoden: hey doc, who's in charge around here
+slackerton: The current admins: @matthewoden, @jeremy
+```
+
 #### News Report
 
 Gets the latest breaking news about a subject.
