@@ -37,9 +37,9 @@ defmodule Slackerton.Wikipedia.Api do
   end
 
   defp handle_response({:ok, %HTTPoison.Response{status_code: 200, body: body}}, _count) do
-    with {:ok, %{"title" => title, "extract" => extract, "content_urls" => urls }} <- Jason.decode(body) do 
+    with {:ok, %{ "type" => type, "title" => title, "extract" => extract, "content_urls" => urls }} <- Jason.decode(body) do 
       url = get_in(urls, ["desktop", "page"])
-      {:ok, %{title: title, extract: extract, url: url } }
+      {:ok, %{type: type, title: title, extract: extract, url: url } }
     else
       otherwise ->
         Logger.error(inspect(otherwise)) 

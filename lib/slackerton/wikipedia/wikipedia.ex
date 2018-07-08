@@ -11,6 +11,9 @@ defmodule Slackerton.Wikipedia do
 
   def summarize(query) do
     case Api.summarize(query) do
+      {:ok, %{ type: "disambiguation"} } ->
+        "Could you be a little more specific? \"#{String.capitalize(query)}\" is a little ambiguous."
+
       {:ok, %{ title: title, extract: extract }} ->
         """
 
