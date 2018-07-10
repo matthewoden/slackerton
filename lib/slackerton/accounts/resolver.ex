@@ -1,5 +1,6 @@
-defmodule Slackerton.UserResolver do
-  alias Slackerton.{ User, Normalize}
+defmodule Slackerton.Accounts.UserResolver do
+  alias Slackerton.{Normalize}
+  alias Slackerton.Users.{Admin, Muted}
   alias Hedwig.Responder
 
   @rejections [
@@ -15,12 +16,12 @@ defmodule Slackerton.UserResolver do
   ]
 
   def create_admin(msg, %{ "User" => user}) do
-    team = Normalize.to_team_id(msg)
-    caller = Normalize.to_user_string(user)
+    team = Normalize.team_id(msg)
+    caller = Normalize.user_id(msg.user)
     user = String.trim_leading(user, "@")
 
-    if User.is_admin?(caller, team) do
-      User.set_admin(user, team, true)
+    if Admin.is_admin?(caller, team) do
+      Admin.set_admin(user, team, true)
       
       Responder.reply(msg, "Ok, I've made #{user} an admin.")
     else
@@ -29,13 +30,13 @@ defmodule Slackerton.UserResolver do
   end
 
   def delete_admin(msg, %{ "User" => user}) do
-    team = Normalize.to_team_id(msg)
-    caller = Normalize.to_user_string(user)
+    team = Normalize.team_id(msg)
+    caller = Normalize.user(msg.user)
     user = String.trim_leading(user, "@")
 
-    if User.is_admin?(caller, team) do
+    if Admin.is_admin?(caller, team) do
       user = String.trim_leading(user, "@")
-      User.set_admin(user, team, false)
+      Admin.set_admin(user, team, false)
       
       Responder.reply(msg, "Ok, I've removed #{user} from the admin list.")
     else
@@ -46,8 +47,8 @@ defmodule Slackerton.UserResolver do
   def list_admins(msg, _) do
     admin_list =
       msg
-      |> Normalize.to_team_id()
-      |> User.list_admins()
+      |> Normalize.team_id()
+      |> Admin.list_admins()
 
     case admin_list do
       {:ok, [] } ->

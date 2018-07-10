@@ -46,7 +46,7 @@ defmodule Slackerton.MixProject do
       {:ex_aws, "~> 2.0"},
       {:ex_aws_dynamo, "~> 2.0"},
       {:hackney, ">= 1.9.0"},
-
+      {:sched_ex, "~> 1.0"}
     ]
   end
 end

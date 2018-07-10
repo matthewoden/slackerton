@@ -2,17 +2,30 @@ defmodule Slackerton.Responders.NaturalLanguage do
   require Logger
   alias Hedwig.Responder
   alias Lex.Runtime.{Response,Request,Conversations}
+  alias Slackerton.Accounts.UserResolver
   alias Slackerton.{Normalize, DadJokesResolver, WordnikResolver, TriviaResolver, 
-    NewsResolver, WikipediaResolver, UserResolver}
+    NewsResolver, WikipediaResolver}
 
   use Responder
 
-  @usage "hey doc <ask for a joke> - Returns a joke."
+  @usage """
+  Natural Language: Say 'hey doc', then ask for something like the following:
+  ... tell me a joke - Returns a joke.
+  ... lets play trivia - Asks a trivia question. Answer with the letters provided.
+  ... what's the latest on / whats the news about <topic> - Grabs the top trending news from one of 63 sources.
+  ... what is / who is / where is <thing> - Provides general knowledge
+  ... can you define / how do you pronounce / can you give an example of <thing> - grammar information
+  
+  Admin Controls:
+  ... add @user as an admin - adds a user as an admin
+  ... remove @user from admins - removes user from admins
+  ... list admins - lists admins for the current slack team
+  """
 
-  hear ~r/^hey doc/i, msg do
+  hear ~r/^hey doc|doc/i, msg do
     input = 
       msg.text
-      |> String.replace("hey doc", "")
+      |> String.replace(~r/hey doc|doc/, "")
       |> String.trim()
       |> Normalize.decode_characters()
       

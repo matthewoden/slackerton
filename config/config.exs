@@ -14,13 +14,10 @@ config :slackerton, Slackerton.Robot,
   log_level: :debug,
   responders: [
     {Hedwig.Responders.Help, []},
-    {Slackerton.Responders.Mathbear, []},
-    {Slackerton.Responders.Slap, []},
-    {Slackerton.Responders.Search, []},
-    {Slackerton.Responders.NaturalLanguage, []},
     {Slackerton.Responders.DadJokes, []},
     {Slackerton.Responders.Trivia, []},
-    {Slackerton.Responders.Calculate, []}
+    {Slackerton.Responders.Calculate, []},
+    {Slackerton.Responders.NaturalLanguage, []},
   ],
   plugs: [
     {Slackerton.Auth, []},

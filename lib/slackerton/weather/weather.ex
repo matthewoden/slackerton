@@ -2,18 +2,18 @@ defmodule Slackerton.Weather do
   alias Slackerton.Weather.Api
   alias Slackerton.Cache
 
-  def severe_weather() do
-    existing_alerts = Cache.get({__MODULE__, :alerts})
+  def severe_weather(room) do
+    last_id = Cache.get({__MODULE__, :last_id})
+    
     case Api.severe_weather() do
-      { :ok, [ alerts ] } ->
+      
+      { :ok, %{"id" => id } = alert } when last_id != id ->
+        Cache.set({__MODULE__, :latest_alert}, alert)
+        Cache.set({__MODULE__, :last_id}, id)
 
-        formatted_alerts =
-          alerts
-          |> Enum.reject(fn alert -> Enum.member?(existing_alerts, alert) end)
-          |> Enum.map(fn alert -> format_headline(alert) end)
-
-        {:ok, formatted_alerts }
-
+        Slackerton.Robot.broadcast_all(format_headline(alert), room)
+        :ok
+        
       _ ->
         {:error, :no_updates}
     end

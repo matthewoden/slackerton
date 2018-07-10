@@ -29,28 +29,35 @@ defmodule Slackerton.Weather.Api do
     client()
     |> get("/alerts")
     |> with_query_params(%{
-      "active" => 1,
       "point" => "38.627003,-90.199402",
-      "severity" => "severe",
-      "urgency" => "immediate",
-      "limit" => 3
+      "start" => timestamp(),
+      "limit" => 1,
     })
     |> send()
     |> parse_response()
   end
 
   defp parse_response({:ok, %{status_code: 200, body: body}}) do    
-    alerts = 
+    alert =  
       @json.decode!(body) 
       |> Map.get("@graph")
       |> Enum.map(&Map.take(&1, ["id", "headline", "description"]))
+      |> Enum.at(0, %{})
       
-    {:ok, alerts}
+    {:ok, alert}
   end
 
   defp parse_response(result) do
     Logger.error(inspect(result))
     :error
   end
+
+  #ISO format2018-07-01T19:50:00-05:00
+  defp timestamp() do
+    Timex.now("America/Chicago") 
+    |> Timex.subtract(Timex.Duration.from_minutes(5))
+    |> Timex.format!("%Y-%m-%dT%T%z", :strftime)
+  end
+  
 
 end

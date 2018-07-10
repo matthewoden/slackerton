@@ -1,8 +1,9 @@
-defmodule Slackerton.User.CacheWarmer do
+defmodule Slackerton.Cache.Warmer do
   use GenServer
   require Logger
-  alias Slackerton.User.Repo
-  alias Slackerton.Cache
+  alias Slackerton.Accounts.User
+  alias Slackerton.Settings.Setting
+  alias Slackerton.Repo
 
   @moduledoc """
   Fetches user data, warms the cache, then dies.
@@ -18,10 +19,11 @@ defmodule Slackerton.User.CacheWarmer do
   end
 
   def handle_info(:work, state) do
-    Logger.debug("Warming the User Cache")
-    {:ok, users} = Repo.all()
+    Logger.debug("Warming the Cache")
+    {:ok, _users} = Repo.all(User)
+    {:ok, _setting} = Repo.all(Setting)
 
-    Logger.debug("User Cache warmed. Shutting down.")
+    Logger.debug("Cache warmed. Shutting down.")
     {:stop, :normal, state}
   end
 

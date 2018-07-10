@@ -3,6 +3,7 @@ defmodule Slackerton.Application do
 
   use Application
   import Supervisor.Spec, warn: false
+  alias Slackerton.{Cache, User, Weather, Trivia}
 
   def start(_type, _args) do
 
@@ -14,23 +15,34 @@ defmodule Slackerton.Application do
     }
 
     children = [
-      supervisor(Slackerton.Cache, []),
-      {Slackerton.Trivia.Store, []},
+      supervisor(Cache, []),
+      worker(Cache.Warmer, [], [restart: :temporary]),
+      {Trivia.Store, []},
       {Lex, lex_config},
-      worker(Slackerton.User.CacheWarmer, [], [restart: :temporary]),
-      robot_worker({"dnd", System.get_env("SLACKERTON_DND_SLACK_TOKEN") }),
+      robot({"dnd", System.get_env("SLACKERTON_DND_SLACK_TOKEN") }),
+      # scheduled("weather_alerts", { Weather, :severe_weather, ["bot-testing"]}, "*/5 * * * *")
     ]
 
     opts = [strategy: :one_for_one, name: Slackerton.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
-  def robot_worker({ team, token }) do
+  # worker wrappers
+  def robot({ team, token }) do
     %{
       id: team,
       start: {Hedwig, :start_robot, [ 
         Slackerton.Robot,  [ team: team, token: token ]
       ]}
+    }
+  end
+
+  def scheduled(id, {mod, fun, args}, cron) do
+    %{ 
+      id: id, 
+      start: {SchedEx, :run_every, [
+        mod, fun, args, cron
+      ]} 
     }
   end
 end

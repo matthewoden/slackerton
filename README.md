@@ -15,13 +15,18 @@ matthewoden: slackerton help
 slackerton:
   slackerton help - Displays all of the help commands that slackerton knows about.
   slackerton help <query> - Displays all help commands that match <query>.
-  mathbear/decide <options> - Makes a decision based on input. Format: decide 1 is left. 2 is right.
-  slap <username> | me - Slaps the user
-  wiki <query>*- Searches wikipedia, returning the first result.
-  google <query> - gets the first google results for your query.
-  search starfinder|pathfinder <query> - searches the SRD, returning the first result for your query.
-  hey doc <ask for a joke> - Returns a joke.
-  pop quiz - Asks a trivia question. Answer with the letters provided.
+  solve <expression> - solves a math problem.
+  Natural Language: Say 'hey doc', then ask for something like the following:
+  ... tell me a joke - Returns a joke.
+  ... lets play trivia - Asks a trivia question. Answer with the letters provided.
+  ... what's the latest on / whats the news about <topic> - Grabs the top trending news from one of 63 sources.
+  ... what is / who is / where is <thing> - Provides general knowledge
+  ... can you define / how do you pronounce / can you give an example of <thing> - grammar information
+
+  Admin Controls:
+  ... add @user as an admin - adds a user as an admin
+  ... remove @user from admins - removes user from admins
+  ... list admins - lists admins for the current slack team
 ```
 
 ---
@@ -103,7 +108,7 @@ matthewoden: hey doc tell me a carrots joke
 slackerton: What did celery say when he broke up with his girlfriend? She wasn't right for me, so I really don't carrot all.
 ```
 
-### Spelling Bee (Definitons, Pronunciations, Examples of use)
+#### Spelling Bee (Definitons, Pronunciations, Examples of use)
 
 "What does WORD mean?", "How do you say WORD?", "Can you use WORD in a sentence?"
 
