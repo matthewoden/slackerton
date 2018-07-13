@@ -26,7 +26,7 @@ defmodule Slackerton.Responders.NaturalLanguage do
   ... list admins - lists admins for the current slack team
   """
 
-  hear ~r/^hey doc|doc/i, msg do
+  hear ~r/^hey doc|^doc|^dork/i, msg do
     input = 
       msg.text
       |> String.replace(~r/hey doc|doc/, "")
