@@ -1,6 +1,7 @@
 defmodule Slackerton.Accounts.Admin do
   alias ExAws.Dynamo
   alias Slackerton.Accounts.User
+  alias Slackerton.Repo
   require Logger
   
 

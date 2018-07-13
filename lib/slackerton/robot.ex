@@ -1,10 +1,9 @@
 defmodule Slackerton.Robot do
-  require Logger
   use Hedwig.Robot, otp_app: :slackerton
 
+  require Logger
   alias Hedwig.Message
   alias Slackerton.Responders.NaturalLanguage
-  alias Slackerton.Cache
 
   def handle_connect(%{opts: opts} = state) do
     team = Keyword.get(opts, :team)

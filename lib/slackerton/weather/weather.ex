@@ -4,7 +4,7 @@ defmodule Slackerton.Weather do
 
   @alert_settings "weather_alert"
 
-  def severe_weather(room) do
+  def severe_weather() do
     latest = Cache.get({__MODULE__, :latest_alert}) || %{}
     latest_id = Map.get(latest, "id")
     

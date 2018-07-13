@@ -1,6 +1,6 @@
 defmodule Slackerton.Accounts.UserResolver do
   alias Slackerton.{Normalize}
-  alias Slackerton.Users.{Admin, Muted}
+  alias Slackerton.Accounts.Admin
   alias Hedwig.Responder
 
   @rejections [
@@ -36,7 +36,7 @@ defmodule Slackerton.Accounts.UserResolver do
 
   def delete_admin(msg, %{ "User" => user}) do
     team = Normalize.team_id(msg)
-    caller = Normalize.user(msg.user)
+    caller = Normalize.user_id(msg.user)
     user = String.trim_leading(user, "@")
 
     if Admin.is_admin?(caller, team) do

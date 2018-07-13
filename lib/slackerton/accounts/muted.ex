@@ -1,5 +1,4 @@
 defmodule Slackerton.Accounts.Muted do
-  alias ExAws.Dynamo
   alias Slackerton.Accounts.User
   require Logger
   
