@@ -1,5 +1,6 @@
 defmodule Slackerton.Accounts.Muted do
   alias Slackerton.Accounts.User
+  alias Slackerton.Repo
   require Logger
   
   def set_muted(id, team, is_muted) do
