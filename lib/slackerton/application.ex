@@ -3,7 +3,8 @@ defmodule Slackerton.Application do
 
   use Application
   import Supervisor.Spec, warn: false
-  alias Slackerton.{Cache, User, Trivia}
+  alias Slackerton.{Cache, Trivia}
+
 
   def start(_type, _args) do
 

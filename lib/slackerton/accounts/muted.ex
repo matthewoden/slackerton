@@ -19,7 +19,7 @@ defmodule Slackerton.Accounts.Muted do
   end
 
   def list_muted(team \\ "default") do
-    Repo.scan("team = :team AND is_muted = :is_muted", [is_muted: true, team: team])
+    Repo.scan(User, "team = :team AND is_muted = :is_muted", [is_muted: true, team: team])
   end
 
 end
