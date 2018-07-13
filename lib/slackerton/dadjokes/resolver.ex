@@ -4,4 +4,5 @@ defmodule Slackerton.DadJokesResolver do
   def tell_joke(msg, %{ "Genre" => genre }) do
     Robot.thread(msg, DadJokes.Api.get(genre), [reply_broadcast: true])
   end
+
 end

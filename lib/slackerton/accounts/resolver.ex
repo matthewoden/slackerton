@@ -29,6 +29,11 @@ defmodule Slackerton.Accounts.UserResolver do
     end
   end
 
+  def create_admin(msg, _) do
+    Responder.reply(msg, "Whoa, I didn't quite get the right info there.")
+  end
+
+
   def delete_admin(msg, %{ "User" => user}) do
     team = Normalize.team_id(msg)
     caller = Normalize.user(msg.user)
@@ -43,6 +48,11 @@ defmodule Slackerton.Accounts.UserResolver do
       Responder.reply(msg, Enum.random(@rejections))
     end
   end
+
+  def delete_admin(msg, _) do
+    Responder.reply(msg, "Whoa, I didn't quite get the right info there.")
+  end
+
 
   def list_admins(msg, _) do
     admin_list =

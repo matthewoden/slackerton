@@ -62,4 +62,9 @@ defmodule Slackerton.Repo do
     end
   end
 
+  def delete(mod, key) do
+    Cache.delete({mod, key})
+    Dynamo.delete_item(mod.table(), key) |> ExAws.request
+  end
+
 end

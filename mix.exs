@@ -39,6 +39,7 @@ defmodule Slackerton.MixProject do
       {:http_builder, "~> 0.4.1"},
       # {:hedwig_slack, "~> 1.0"},
       {:lex, github: "matthewoden/lex", branch: "master"},
+      #{:hedwig_slack, path: "../hedwig_slack" },
       {:hedwig_slack, github: "matthewoden/hedwig_slack", branch: "master" },
       {:nebulex, "~> 1.0.0-rc.2"},
       {:abacus, "~> 0.4.2"},

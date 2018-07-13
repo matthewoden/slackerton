@@ -4,7 +4,7 @@ defmodule Slackerton.Responders.NaturalLanguage do
   alias Lex.Runtime.{Response,Request,Conversations}
   alias Slackerton.Accounts.UserResolver
   alias Slackerton.{Normalize, DadJokesResolver, WordnikResolver, TriviaResolver, 
-    NewsResolver, WikipediaResolver}
+    NewsResolver, WikipediaResolver, WeatherResolver}
 
   use Responder
 
@@ -16,6 +16,10 @@ defmodule Slackerton.Responders.NaturalLanguage do
   ... what is / who is / where is <thing> - Provides general knowledge
   ... can you define / how do you pronounce / can you give an example of <thing> - grammar information
   
+  Weather Alerts:
+  ... put severe weather alerts in here
+  ... remove weather alerts from here
+
   Admin Controls:
   ... add @user as an admin - adds a user as an admin
   ... remove @user from admins - removes user from admins
@@ -33,6 +37,30 @@ defmodule Slackerton.Responders.NaturalLanguage do
 
     :ok
   end  
+
+  defp converse(response, msg) do
+    case response do
+      %Response.ElicitIntent{ message: message } ->
+        Slackerton.Robot.thread(msg, message)
+
+      %Response.ConfirmIntent{ message: message } ->
+        Slackerton.Robot.thread(msg, message)
+
+      %Response.ElicitSlot{ message: message } ->
+        Slackerton.Robot.thread(msg, message)
+
+      %Response.Failed{ message: message } ->
+        Slackerton.Robot.thread(msg, message)
+
+      %Response.Error{ data: data } ->
+        Logger.error(inspect(data))
+        Slackerton.Robot.thread(msg, "Oh no, something terrible happened. Maybe try that again in a bit.")
+
+      %Response.ReadyForFulfillment{ intent_name: intent, slots: slots } ->
+        fulfillment(intent, slots, msg)
+
+    end
+  end
 
   #todo - turn into some kind of router.
   def fulfillment(intent, slots, msg) do
@@ -57,6 +85,12 @@ defmodule Slackerton.Responders.NaturalLanguage do
       "ListAdmin" -> UserResolver.list_admins(msg, slots)
 
       "SummarizeTopic" -> WikipediaResolver.summarize(msg, slots)
+
+      "AddSevereWeatherAlert" -> WeatherResolver.add_alert(msg, slots)
+
+      "RemoveSevereWeatherAlert" -> WeatherResolver.remove_alert(msg, slots)
+
+      "DetailSevereWeather" -> WeatherResolver.detail_alert(msg, slots)
 
       _ ->
         :ok
@@ -96,23 +130,6 @@ defmodule Slackerton.Responders.NaturalLanguage do
 
   defp user(msg), do: Normalize.user_id(msg.user)
 
-  defp converse(response, msg) do
-    case response do
-      %Response.ElicitIntent{ message: message } ->
-        Slackerton.Robot.thread(msg, message)
-
-      %Response.ConfirmIntent{ message: message } ->
-        Slackerton.Robot.thread(msg, message)
-
-      %Response.ElicitSlot{ message: message } ->
-        Slackerton.Robot.thread(msg, message)
-
-      %Response.ReadyForFulfillment{ intent_name: intent, slots: slots } ->
-        fulfillment(intent, slots, msg)
-
-      %Response.Failed{ message: message } ->
-        Slackerton.Robot.thread(msg, message)
-    end
-  end
+  
 
 end       

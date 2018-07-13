@@ -1,24 +1,38 @@
 defmodule Slackerton.Weather do
   alias Slackerton.Weather.Api
-  alias Slackerton.Cache
+  alias Slackerton.{Cache,Settings}
+
+  @alert_settings "weather_alert"
 
   def severe_weather(room) do
-    last_id = Cache.get({__MODULE__, :last_id})
+    latest = Cache.get({__MODULE__, :latest_alert}) || %{}
+    latest_id = Map.get(latest, "id")
     
     case Api.severe_weather() do
       
-      { :ok, %{"id" => id } = alert } when last_id != id ->
+      { :ok, %{"id" => id } = alert } when latest_id != id ->
         Cache.set({__MODULE__, :latest_alert}, alert)
-        Cache.set({__MODULE__, :last_id}, id)
 
-        Slackerton.Robot.broadcast_all(format_headline(alert), room)
+        text = format_headline(alert)
+        subscribers = Settings.all(@alert_settings)
+
+        Enum.each(subscribers, fn %{key: team, value: room} -> 
+          Slackerton.Robot.broadcast(team, text, room)
+        end)
+
         :ok
-        
       _ ->
         {:error, :no_updates}
     end
   end
 
+  def subscribe_channel(robot, room) do
+    Settings.set(@alert_settings, robot, room)
+  end
+
+  def unsubscribe_channel(robot) do
+    Settings.set(@alert_settings, robot, nil)
+  end
 
   def severe_weather_full() do
     case Cache.get({__MODULE__, :latest_alert}) do
@@ -34,11 +48,11 @@ defmodule Slackerton.Weather do
     """
     #{headline}
 
-    For full alert information, ask me about severe weather.
+    For full alert information, ask me for the full severe weather alert.
     """
   end
 
-  defp format_full_alert(%{ "headline" => headline, "description" => description, "areaDesc" => area }) do
+  defp format_full_alert(%{ "headline" => headline, "description" => description }) do
     """
     #{headline}
 

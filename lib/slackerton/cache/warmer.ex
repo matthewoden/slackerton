@@ -22,7 +22,6 @@ defmodule Slackerton.Cache.Warmer do
     Logger.debug("Warming the Cache")
     {:ok, _users} = Repo.all(User)
     {:ok, _setting} = Repo.all(Setting)
-
     Logger.debug("Cache warmed. Shutting down.")
     {:stop, :normal, state}
   end
