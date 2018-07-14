@@ -6,5 +6,5 @@ config :slackerton, Slackerton.Robot,
 config :slackerton, Slackerton.Github.Api,
   http_adapter: HttpBuilder.Adapters.HTTPoison,
   json_parser: Jason,
-  repo: "matthewoden/slackerton"
+  repo: "matthewoden/slackerton",
   api_key: System.get_env("SLACKERTON_GITHUB_TOKEN")
