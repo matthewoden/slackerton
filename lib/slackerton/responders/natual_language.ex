@@ -3,13 +3,13 @@ defmodule Slackerton.Responders.NaturalLanguage do
   alias Hedwig.Responder
   alias Lex.Runtime.{Response,Request,Conversations}
   alias Slackerton.Accounts.UserResolver
-  alias Slackerton.{Normalize, DadJokesResolver, WordnikResolver, TriviaResolver, 
-    NewsResolver, WikipediaResolver, WeatherResolver}
+  alias Slackerton.{NewsResolver, Normalize, DadJokesResolver, GithubResolver, 
+          TriviaResolver, WikipediaResolver, WeatherResolver, WordnikResolver}
 
   use Responder
 
   @usage """
-  Natural Language: Say 'hey doc', then ask for something like the following:
+  Natural Language: Say 'doc' or 'hey doc', then ask for something like the following:
   ... tell me a joke - Returns a joke.
   ... lets play trivia - Asks a trivia question. Answer with the letters provided.
   ... what's the latest on / whats the news about <topic> - Grabs the top trending news from one of 63 sources.
@@ -20,13 +20,16 @@ defmodule Slackerton.Responders.NaturalLanguage do
   ... put severe weather alerts in here
   ... remove weather alerts from here
 
+  Feature Requests:
+  ... feature request: <request> - Files a feature request on the github project.
+
   Admin Controls:
   ... add @user as an admin - adds a user as an admin
   ... remove @user from admins - removes user from admins
   ... list admins - lists admins for the current slack team
   """
 
-  hear ~r/^hey doc|^doc|^dork/i, msg do
+  hear ~r/^hey doc|^doc/i, msg do
     input = 
       msg.text
       |> String.replace(~r/hey doc|doc/, "")
@@ -91,6 +94,8 @@ defmodule Slackerton.Responders.NaturalLanguage do
       "RemoveSevereWeatherAlert" -> WeatherResolver.remove_alert(msg, slots)
 
       "DetailSevereWeather" -> WeatherResolver.detail_alert(msg, slots)
+
+      "SuggestFeature" -> GithubResolver.feature_request(msg, slots)
 
       _ ->
         :ok

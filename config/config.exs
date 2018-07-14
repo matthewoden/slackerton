@@ -57,4 +57,10 @@ config :slackerton, Slackerton.News.Api,
   json_parser: Jason,
   api_key: System.get_env("SLACKERTON_NEWS_API")
 
+config :slackerton, Slackerton.Github.Api,
+  http_adapter: HttpBuilder.Adapters.HTTPoison,
+  json_parser: Jason,
+  repo: "slackerton/slackerton-dev-issues",
+  api_key: System.get_env("SLACKERTON_GITHUB_TOKEN")
+
 import_config "#{Mix.env}.exs"

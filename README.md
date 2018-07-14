@@ -16,12 +16,20 @@ slackerton:
   slackerton help - Displays all of the help commands that slackerton knows about.
   slackerton help <query> - Displays all help commands that match <query>.
   solve <expression> - solves a math problem.
-  Natural Language: Say 'hey doc', then ask for something like the following:
+  Natural Language: Say 'doc' or 'hey doc', then ask for something like the following:
   ... tell me a joke - Returns a joke.
   ... lets play trivia - Asks a trivia question. Answer with the letters provided.
   ... what's the latest on / whats the news about <topic> - Grabs the top trending news from one of 63 sources.
   ... what is / who is / where is <thing> - Provides general knowledge
   ... can you define / how do you pronounce / can you give an example of <thing> - grammar information
+
+  Weather Alerts:
+  ... put severe weather alerts in this channel
+  ... remove weather alerts from here
+  ... tell me about severe weather
+
+  Feature Requests:
+  ... feature request: <request> - Files a feature request on the github project.
 
   Admin Controls:
   ... add @user as an admin - adds a user as an admin

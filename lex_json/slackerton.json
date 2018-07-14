@@ -1,0 +1,480 @@
+{
+  "metadata": {
+    "schemaVersion": "1.0",
+    "importType": "LEX",
+    "importFormat": "JSON"
+  },
+  "resource": {
+    "name": "Slackerton",
+    "version": "10",
+    "intents": [
+      {
+        "rejectionStatement": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Ok, I won't do anything."
+            }
+          ]
+        },
+        "name": "AddAdmin",
+        "version": "5",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "make {UserId} an admin",
+          "add {UserId} as an admin",
+          "make {UserId} a superuser",
+          "add admin {UserId}",
+          "add superuser {UserId}",
+          "add super user {UserId}",
+          "make admin {UserId}",
+          "make superuser {UserId}"
+        ],
+        "slots": [
+          {
+            "name": "UserId",
+            "slotConstraint": "Required",
+            "slotType": "AMAZON.Genre",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Which user should become an admin?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "sampleUtterances": []
+          }
+        ],
+        "confirmationPrompt": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Are you sure I should add them as a new admin?"
+            }
+          ],
+          "maxAttempts": 3
+        }
+      },
+      {
+        "name": "StopActions",
+        "version": "1",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "stop",
+          "quit"
+        ],
+        "slots": []
+      },
+      {
+        "name": "DadJokes",
+        "version": "5",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "tell me a {Genre} joke",
+          "tell me a joke",
+          "I want to hear a joke",
+          "tell me something funny",
+          "know any good jokes",
+          "tell me a pun",
+          "tell me a joke about {Genre}",
+          "joke please",
+          "jokes"
+        ],
+        "slots": [
+          {
+            "name": "Genre",
+            "slotConstraint": "Required",
+            "slotType": "AMAZON.Genre",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What about?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "sampleUtterances": []
+          }
+        ]
+      },
+      {
+        "rejectionStatement": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Ok. I won't do a thing."
+            },
+            {
+              "contentType": "PlainText",
+              "content": "Got it. Not adding anything."
+            }
+          ]
+        },
+        "name": "AddSevereWeatherAlert",
+        "version": "2",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "add weather alert in here",
+          "add weather updates in here",
+          "put weather updates in here",
+          "add weather alerts in this channel",
+          "put severe weather alerts here",
+          "post weather alerts in this channel",
+          "include weather alerts in this channel",
+          "add severe weather alerts in here"
+        ],
+        "slots": [],
+        "confirmationPrompt": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Are you sure you want to add severe weather updates to this channel?"
+            }
+          ],
+          "maxAttempts": 3
+        }
+      },
+      {
+        "rejectionStatement": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Ok then, I'll leave it."
+            },
+            {
+              "contentType": "PlainText",
+              "content": "Gotcha. Won't do a thing."
+            }
+          ]
+        },
+        "name": "RemoveSevereWeatherAlert",
+        "version": "2",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "remove severe weather alert",
+          "stop severe weather alerts in here",
+          "stop weather alerts",
+          "unsubscribe from weather alerts",
+          "remove weather alerts from this channel"
+        ],
+        "slots": [],
+        "confirmationPrompt": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Are you sure you want to remove weather alerts from this channel?"
+            }
+          ],
+          "maxAttempts": 3
+        }
+      },
+      {
+        "name": "ListAdmin",
+        "version": "5",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "who's in charge around here",
+          "list admins",
+          "list all admins",
+          "list superusers",
+          "who's the boss",
+          "list admin",
+          "whos in charge",
+          "who are the admins"
+        ],
+        "slots": []
+      },
+      {
+        "name": "PronounceWord",
+        "version": "3",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "how do you say {Word}",
+          "What's the pronunciation for {Word}",
+          "how do you pronounce {Word}",
+          "how is {Word} pronounced",
+          "can you tell me how to say {Word}",
+          "how do you pronounce the word {Word}",
+          "can you tell me how to say the word {Word}",
+          "how do you say the word {Word}",
+          "how is the word {Word} pronounced"
+        ],
+        "slots": [
+          {
+            "name": "Word",
+            "slotConstraint": "Required",
+            "slotType": "AMAZON.Genre",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What are you trying to pronounce?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "sampleUtterances": []
+          }
+        ]
+      },
+      {
+        "name": "DetailSevereWeather",
+        "version": "1",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "tell me about severe weather",
+          "tell me more about severe weather",
+          "give me the full severe weather alert",
+          "full severe weather alert",
+          "tell me the full severe weather alert"
+        ],
+        "slots": []
+      },
+      {
+        "name": "ExampleWord",
+        "version": "3",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "Can you give an example of {Word}",
+          "Can you use {Word} in a sentence",
+          "use {Word} in a sentence",
+          "how would you use {Word}",
+          "can use the word {Word} in a sentence",
+          "can you give an example of the word {Word}",
+          "how would you use the word {Word}"
+        ],
+        "slots": [
+          {
+            "name": "Word",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.Genre",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What word should I use in a sentence?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "sampleUtterances": []
+          }
+        ]
+      },
+      {
+        "name": "SummarizeTopic",
+        "version": "1",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "What is a {Topic}",
+          "What is an {Topic}",
+          "Where is {Topic}",
+          "Where's the {Topic}",
+          "Whats a {Topic}",
+          "Who is the {Topic}",
+          "Who is {Topic}"
+        ],
+        "slots": [
+          {
+            "name": "Topic",
+            "slotConstraint": "Required",
+            "slotType": "AMAZON.Genre",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What are you asking me to summarize?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "sampleUtterances": []
+          }
+        ]
+      },
+      {
+        "name": "DefineWord",
+        "version": "6",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "What does {Word} mean",
+          "define {Word}",
+          "can you define the word {Word}"
+        ],
+        "slots": [
+          {
+            "name": "Word",
+            "slotConstraint": "Required",
+            "slotType": "AMAZON.Genre",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What word do you want to define?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "sampleUtterances": []
+          }
+        ]
+      },
+      {
+        "name": "GetNews",
+        "version": "1",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "what's the news on {Topic}",
+          "What's the latest on {Topic}",
+          "whats happening with {Topic}",
+          "give me the news about {Topic}",
+          "latest news about {Topic}",
+          "give me the latest on {Topic}",
+          "whats the update on {Topic}"
+        ],
+        "slots": [
+          {
+            "name": "Topic",
+            "slotConstraint": "Required",
+            "slotType": "AMAZON.Genre",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What subject are you wanting news about?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "sampleUtterances": []
+          }
+        ]
+      },
+      {
+        "name": "TriviaGame",
+        "version": "1",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "let's play a game",
+          "lets play trivia",
+          "trivia",
+          "pop quiz",
+          "trivia game",
+          "quizbowl",
+          "quiz me",
+          "another round of trivia"
+        ],
+        "slots": []
+      },
+      {
+        "rejectionStatement": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Ok, I won't do anything."
+            }
+          ]
+        },
+        "name": "RemoveAdmin",
+        "version": "2",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "remove superuser from {UserId}",
+          "remove admin {UserId}",
+          "remove admin from {UserId}",
+          "remove {UserId} as an admin",
+          "remove {UserId} from the admin list",
+          "remove {UserId} from admins",
+          "take admin from {UserId}",
+          "take admin powers from {UserId}"
+        ],
+        "slots": [
+          {
+            "name": "UserId",
+            "slotConstraint": "Required",
+            "slotType": "AMAZON.Genre",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What user?"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "sampleUtterances": []
+          }
+        ],
+        "confirmationPrompt": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Are you sure I should remove them as an admin?"
+            }
+          ],
+          "maxAttempts": 3
+        }
+      }
+    ],
+    "voiceId": "0",
+    "childDirected": false,
+    "locale": "en-US",
+    "idleSessionTTLInSeconds": 300,
+    "clarificationPrompt": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, can you please repeat that?"
+        }
+      ],
+      "maxAttempts": 5
+    },
+    "abortStatement": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, I could not understand. Goodbye."
+        }
+      ]
+    }
+  }
+}
