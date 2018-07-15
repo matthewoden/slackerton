@@ -1,4 +1,4 @@
-defmodule Slackerton.Normalize do
+defmodule SlackertonChat.Normalize do
   @moduledoc """
   Normalizes differences between Hedwig Adapters
   """

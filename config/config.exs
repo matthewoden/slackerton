@@ -6,7 +6,7 @@ config :slackerton, Slackerton.Cache,
   adapter: Nebulex.Adapters.Local,
   gc_interval: 86_400 # 24 hrs
 
-config :slackerton, Slackerton.Robot,
+config :slackerton, SlackertonChat.Robot,
   name: "slackerton",
   aka: "/",
   token: System.get_env("MATHBEAR_SLACK_TOKEN"),
@@ -14,14 +14,7 @@ config :slackerton, Slackerton.Robot,
   log_level: :debug,
   responders: [
     {Hedwig.Responders.Help, []},
-    {Slackerton.Responders.DadJokes, []},
-    {Slackerton.Responders.Trivia, []},
-    {Slackerton.Responders.Calculate, []},
-    {Slackerton.Responders.NaturalLanguage, []},
-  ],
-  plugs: [
-    {Slackerton.Auth, []},
-    {Slackerton.Responders.NaturalLanguage, []}
+    {SlackertonChat.Responders, []}
   ]
 
 config :slackerton, 

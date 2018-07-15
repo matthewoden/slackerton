@@ -29,6 +29,7 @@ defmodule Slackerton.DadJokes.Api do
     |> with_receive_timeout(30_000)
   end
 
+  # TODO: break text out into a seperate module
   defp parse_search_response({:ok, %{status_code: 200, body: body}}, phrase) do
     case @json.decode(body) do
       {:ok, %{ "results" => [] }} ->

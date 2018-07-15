@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :slackerton, Slackerton.Robot,
+config :slackerton, SlackertonChat.Robot,
   adapter: Hedwig.Adapters.Slack
 
 config :slackerton, Slackerton.Github.Api,

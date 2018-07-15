@@ -20,9 +20,8 @@ defmodule Slackerton.MixProject do
         :timex,
         :hedwig, 
         :hedwig_slack,
-        :abacus,
       ],
-      mod: {Slackerton.Application, []}
+      mod: {Slackerton, []}
     ]
   end
 
@@ -42,7 +41,6 @@ defmodule Slackerton.MixProject do
       #{:hedwig_slack, path: "../hedwig_slack" },
       {:hedwig_slack, github: "matthewoden/hedwig_slack", branch: "master" },
       {:nebulex, "~> 1.0.0-rc.2"},
-      {:abacus, "~> 0.4.2"},
       {:timex, "~> 3.1"},
       {:ex_aws, "~> 2.0"},
       {:ex_aws_dynamo, "~> 2.0"},

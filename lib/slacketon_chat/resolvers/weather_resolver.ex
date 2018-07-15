@@ -1,6 +1,7 @@
-defmodule Slackerton.WeatherResolver do
+defmodule SlackertonChat.WeatherResolver do
   require Logger
-  alias Slackerton.{Weather, Robot}
+  alias Slackerton.Weather
+  alias SlackertonChat.Robot
   alias Hedwig.Responder
   
   def add_alert(%{ private: %{ "robot" => robot }, room: room } = msg, _slots) do

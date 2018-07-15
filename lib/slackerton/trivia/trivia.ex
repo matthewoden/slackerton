@@ -1,6 +1,5 @@
 defmodule Slackerton.Trivia do
   alias Slackerton.Trivia.{Api, Store}
-  alias Slackerton.Normalize
 
   def new(room, on_complete) do
     if in_quiz(room) do
@@ -71,13 +70,8 @@ defmodule Slackerton.Trivia do
   end
 
   def format_winners([]), do:  "...Nobody!"
-  def format_winners(winners) do
-    winners
-    |> Enum.map(&Normalize.to_user_string/1) 
-    |> Enum.join(", ")
-  end
-
-  def in_quiz(room), do: Store.active?(room)
+  def format_winners(winners), do: Enum.join(winners,", ")
     
+  def in_quiz(room), do: Store.active?(room)
 
 end

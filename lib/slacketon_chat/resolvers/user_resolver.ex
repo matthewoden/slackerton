@@ -1,5 +1,5 @@
-defmodule Slackerton.Accounts.UserResolver do
-  alias Slackerton.{Normalize}
+defmodule SlackertonChatChat.UserResolver do
+  alias SlackertonChat.Normalize
   alias Slackerton.Accounts.Admin
   alias Hedwig.Responder
 

@@ -1,6 +1,7 @@
 defmodule Slackerton.Weather do
   alias Slackerton.Weather.Api
   alias Slackerton.{Cache,Settings}
+  alias SlackertonChat.Robot
 
   @alert_settings "weather_alert"
 
@@ -17,7 +18,7 @@ defmodule Slackerton.Weather do
         subscribers = Settings.all(@alert_settings)
 
         Enum.each(subscribers, fn %{key: team, value: room} -> 
-          Slackerton.Robot.broadcast(team, text, room)
+          Robot.broadcast(team, text, room)
         end)
 
         :ok

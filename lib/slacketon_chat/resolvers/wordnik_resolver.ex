@@ -1,4 +1,4 @@
-defmodule Slackerton.WordnikResolver do
+defmodule SlackertonChat.WordnikResolver do
   alias Slackerton.Wordnik
   alias Hedwig.Responder
 

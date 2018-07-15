@@ -4,7 +4,13 @@ A mostly useless Hedwig Slackbot for a local slack.
 
 Uses my fork of [Hedwig_Slack](https://github.com/matthewoden/hedwig_slack), to enable support for Slack threading.
 
-## Current Responders:
+## Structure
+
+- slackerton - core services
+- slackerton_chat - contains logic for the chat interface. Responders for Hedwig, Resolvers for AWS Lex
+- slackerton_web - TODO: contains the logic for the web interface
+
+## Current Responders/Resolvers:
 
 ### Help
 
