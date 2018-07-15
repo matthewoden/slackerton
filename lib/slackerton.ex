@@ -4,7 +4,6 @@ defmodule Slackerton do
   use Application
   import Supervisor.Spec, warn: false
   alias Slackerton.{Cache, Trivia}
-  alias SlackertonChat.{Robot, Router}
 
 
   def start(_type, _args) do

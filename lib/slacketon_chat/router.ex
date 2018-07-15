@@ -1,7 +1,6 @@
 defmodule SlackertonChat.Router do
   use SlackertonChat.Lex.Router
-  
-  alias SlackertonChat.{NewsResolver, Normalize, DadJokesResolver, GithubResolver, 
+  alias SlackertonChat.{NewsResolver, DadJokesResolver, GithubResolver, 
           TriviaResolver, WikipediaResolver, WeatherResolver, WordnikResolver}
 
   resolve "DadJokes", DadJokesResolver, :tell_joke

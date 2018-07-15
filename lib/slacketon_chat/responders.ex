@@ -1,7 +1,7 @@
 defmodule SlackertonChat.Responders do
   use Hedwig.Responder
   alias SlackertonChat.TriviaResolver
-  alias SlackertonChat.{Lex, Normalize, DadJokeResolver, TriviaResolver}
+  alias SlackertonChat.{Lex, Normalize, DadJokesResolver, TriviaResolver}
 
   @usage """
   Natural Language: Say 'doc' or 'hey doc', then ask for something like the following:
