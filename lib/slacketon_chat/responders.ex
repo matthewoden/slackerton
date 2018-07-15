@@ -40,6 +40,6 @@ defmodule SlackertonChat.Responders do
   # other resolvers
 
   hear ~r/^a$|^b$|^c$|^d$|^e$/i, msg, do: TriviaResolver.answer_question(msg, %{})
-  hear ~r/(I'm)|(I’m)/i, msg, do: DadJokeResolver.say_hello(msg, %{})
+  hear ~r/(I'm)|(I’m)/i, msg, do: DadJokesResolver.say_hello(msg, %{})
   
 end
