@@ -66,12 +66,6 @@ defmodule SlackertonChat.Robot do
   end
 
   def handle_in(%Message{} = msg, state) do
-    # TODO: add middleware concept
-    # robot = Keyword.get(state.opts, :team)
-    # private = Map.put(msg.private, "robot", robot)
-    # msg = Map.put(msg, :private, private)
-
-    # Lex.handle_conversations(msg)
     middlewares = Keyword.get(state.opts, :middlewares, [])
     [msg, state] = Middleware.dispatch(middlewares, msg, state)
 

@@ -5,10 +5,14 @@ defmodule SlackertonChat.Responders do
 
   @usage """
   Natural Language: Say 'doc' or 'hey doc', then ask for something like the following:
+
+  Fun and Games:
   ... tell me a joke - Returns a joke.
   ... lets play trivia - Asks a trivia question. Answer with the letters provided.
+
+  General Knowledge:
   ... what's the latest on / whats the news about <topic> - Grabs the top trending news from one of 63 sources.
-  ... what is / who is / where is <thing> - Provides general knowledge
+  ... what is / who is / where is <thing> - Provides general information about a topic
   ... can you define / how do you pronounce / can you give an example of <thing> - grammar information
   
   Weather Alerts:
