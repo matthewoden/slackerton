@@ -2,7 +2,7 @@ defmodule SlackertonChat.Robot do
   use Hedwig.Robot, otp_app: :slackerton
   require Logger
   alias Hedwig.Message
-  alias SlackertonChat.Lex
+  alias SlackertonChat.{Helpers, Middleware}
 
   def broadcast(team, room, text) do
     case :global.whereis_name(team) do
@@ -67,13 +67,19 @@ defmodule SlackertonChat.Robot do
 
   def handle_in(%Message{} = msg, state) do
     # TODO: add middleware concept
-    robot = Keyword.get(state.opts, :team)
-    private = Map.put(msg.private, "robot", robot)
-    msg = Map.put(msg, :private, private)
+    # robot = Keyword.get(state.opts, :team)
+    # private = Map.put(msg.private, "robot", robot)
+    # msg = Map.put(msg, :private, private)
 
-    Lex.handle_conversations(msg)
+    # Lex.handle_conversations(msg)
+    middlewares = Keyword.get(state.opts, :middlewares, [])
+    [msg, state] = Middleware.dispatch(middlewares, msg, state)
 
-    {:dispatch, msg, state}
+    if Helpers.get_private(msg, "muted") do
+      {:noreply, state}
+    else
+      {:dispatch, msg, state}
+    end
   end
 
   def handle_in(_, state) do

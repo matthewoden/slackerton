@@ -1,15 +1,25 @@
 defmodule SlackertonChat.Lex do
   require Logger
   alias Lex.Runtime.{Response,Request,Conversations}
-  alias SlackertonChat.{Router, Robot, Normalize}
+  alias SlackertonChat.{Router, Robot, Helpers}
+  alias Slackerton.Accounts.Admin
 
   def converse(response, msg) do
+    userId = Helpers.user_id(msg.user)
+    teamId = Helpers.team_id(msg)
+
     case response do
       %Response.ElicitIntent{ message: message } ->
         Robot.thread(msg, message)
 
       %Response.ConfirmIntent{ message: message } ->
-        Robot.thread(msg, message)
+        # TODO: Create middleware for callbacks?
+        if Admin.is_admin?(userId, teamId) do
+          Robot.thread(msg, message)
+        else 
+          Robot.thread(msg, Admin.reject())
+          put_text("stop", user(msg), context(msg))
+        end
 
       %Response.ElicitSlot{ message: message } ->
         Robot.thread(msg, message)
@@ -36,7 +46,7 @@ defmodule SlackertonChat.Lex do
       input = 
         msg.text
         |> String.trim()
-        |> Normalize.decode_characters()
+        |> Helpers.decode_characters()
 
       put_text(input, userId, contextId) 
       |> converse(msg)
@@ -57,6 +67,6 @@ defmodule SlackertonChat.Lex do
   def context(%{ private: %{ "ts" => context }}), do: context
   def context(_), do: "default"
 
-  def user(msg), do: Normalize.user_id(msg.user)
+  def user(msg), do: Helpers.user_id(msg.user)
 
 end
