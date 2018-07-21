@@ -15,6 +15,11 @@ config :slackerton, SlackertonChat.Robot,
   responders: [
     {Hedwig.Responders.Help, []},
     {SlackertonChat.Responders, []}
+  ],
+  middlewares: [
+    SlackertonChat.Middleware.Muted,
+    SlackertonChat.Middleware.Robot,
+    SlackertonChat.Middleware.Conversation
   ]
 
 config :slackerton, 
@@ -29,6 +34,9 @@ config :slackerton, Lex,
   bot_name: "Slackerton",
   aws_access_key_id: System.get_env("SLACKERTON_AWS_ACCESS_KEY_ID"),
   aws_secret_access_key: System.get_env("SLACKERTON_AWS_SECRET_ACCESS_KEY")
+
+config :slackerton, Slackerton.Repo,
+  adapter: Slackerton.Repo.Dynamo
 
 config :ex_aws,
   json_codec: Jason,
