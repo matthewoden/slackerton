@@ -28,4 +28,14 @@ defmodule SlackertonChat.WeatherResolver do
     Responder.reply(msg, Weather.severe_weather_full())
   end
 
+  def broadcast_alert() do
+    with {:ok, {subscribers, text}} <- Weather.check_severe_weather() do
+      Enum.each(subscribers, fn {team, room} -> Robot.broadcast(team, text, room) end)
+    else
+      _ -> 
+        Logger.debug("SEVERE WEATHER: No weather alerts.")
+        :ok
+    end
+  end
+
 end

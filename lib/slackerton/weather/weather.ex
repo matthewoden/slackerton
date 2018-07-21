@@ -1,11 +1,10 @@
 defmodule Slackerton.Weather do
   alias Slackerton.Weather.Api
   alias Slackerton.{Cache,Settings}
-  alias SlackertonChat.Robot
 
   @alert_settings "weather_alert"
 
-  def severe_weather() do
+  def check_severe_weather() do
     latest = Cache.get({__MODULE__, :latest_alert}) || %{}
     latest_id = Map.get(latest, "id")
     
@@ -15,15 +14,14 @@ defmodule Slackerton.Weather do
         Cache.set({__MODULE__, :latest_alert}, alert)
 
         text = format_headline(alert)
-        subscribers = Settings.all(@alert_settings)
+        subscribers = 
+          Settings.all(@alert_settings) 
+          |> Enum.map(fn %{key: team, value: room} -> {team, room} end)
 
-        Enum.each(subscribers, fn %{key: team, value: room} -> 
-          Robot.broadcast(team, text, room)
-        end)
+        {text, subscribers}
 
-        :ok
       _ ->
-        {:error, :no_updates}
+        nil
     end
   end
 
