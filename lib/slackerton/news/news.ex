@@ -4,25 +4,26 @@ defmodule Slackerton.News do
   require Logger
 
   def latest_for(query) do
+
     latest = Cache.get({__MODULE__, :latest})
     case Api.latest_for(query) do
-      {:ok, [] } ->
-        "Sorry, there's nothing new about \"#{query}\" right now."
 
       {:ok, [ %{"title" => title } = article | _rest ] }
         when title != latest ->
           Cache.set({__MODULE__, :latest}, title, [ttl: 86400])
-          article_markdown(article)
+          {:ok, article}
+
+      {:ok, [] } ->
+          {:error, :no_news} 
+
+      {:ok, [ %{"title" => title } | _rest ] }
+        when title == latest ->
+          {:error, :no_news} 
 
       otherwise ->
-        Logger.debug(inspect(otherwise))
-        "Sorry, I couldn't get the latest news about \"#{query}\" at this time."
+        Logger.debug("#{__MODULE__}: #{inspect(otherwise)}")
+        {:error, :api_failure}
     end
-  end
-
-  # article should auto expand. Markdown not needed
-  defp article_markdown(article) do
-    article["url"]
   end
 
 end

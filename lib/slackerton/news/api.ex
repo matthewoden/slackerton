@@ -41,11 +41,9 @@ defmodule Slackerton.News.Api do
     |> parse_response()
   end
 
-  @keys ["source", "publishedAt", "title", "description", "url"]
-
   defp parse_response({:ok, %{status_code: 200, body: body}}) do  
     with {:ok, %{ "articles" => articles }} <- @json.decode(body) do
-      {:ok, Enum.map(articles, &Map.take(&1, @keys)) }
+      {:ok, articles }
     else
       otherwise -> otherwise
     end  

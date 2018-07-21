@@ -36,7 +36,6 @@ defmodule Slackerton.MixProject do
       {:jason, "~> 1.0"},
       {:floki, "~> 0.19"},
       {:http_builder, "~> 0.4.1"},
-      # {:hedwig_slack, "~> 1.0"},
       {:lex, github: "matthewoden/lex", branch: "master"},
       #{:hedwig_slack, path: "../hedwig_slack" },
       {:hedwig_slack, github: "matthewoden/hedwig_slack", branch: "master" },
