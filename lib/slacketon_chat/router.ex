@@ -1,6 +1,6 @@
 defmodule SlackertonChat.Router do
   use SlackertonChat.Lex.Router
-  alias SlackertonChat.{NewsResolver, DadJokesResolver, GithubResolver, 
+  alias SlackertonChat.{AdminResolver, MutedResolver, NewsResolver, DadJokesResolver, GithubResolver, 
           TriviaResolver, WikipediaResolver, WeatherResolver, WordnikResolver}
 
   resolve "DadJokes", DadJokesResolver, :tell_joke
@@ -12,9 +12,13 @@ defmodule SlackertonChat.Router do
   resolve "PronounceWord", WordnikResolver, :pronounce_word
   resolve "ExampleWord", WordnikResolver, :example_word
 
-  resolve "AddAdmin", UserResolver, :create_admin
-  resolve "RemoveAdmin", UserResolver, :delete_admin
-  resolve "ListAdmin", UserResolver, :list_admins
+  resolve "AddAdmin", AdminResolver, :create_admin
+  resolve "RemoveAdmin", AdminResolver, :delete_admin
+  resolve "ListAdmin", AdminResolver, :list_admins
+
+  resolve "MuteUser", MutedResolver, :mute_user
+  resolve "UnmuteUser", MutedResolver, :unmute_user
+  resolve "ListMuted", MutedResolver, :list_muted
 
   resolve "AddSevereWeatherAlert", WeatherResolver, :add_alert
   resolve "RemoveSevereWeatherAlert", WeatherResolver, :remove_alert

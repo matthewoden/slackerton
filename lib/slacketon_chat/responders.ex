@@ -1,7 +1,7 @@
 defmodule SlackertonChat.Responders do
   use Hedwig.Responder
   alias SlackertonChat.TriviaResolver
-  alias SlackertonChat.{Lex, Normalize, DadJokesResolver, TriviaResolver}
+  alias SlackertonChat.{Lex, Helpers, DadJokesResolver, TriviaResolver}
 
   @usage """
   Natural Language: Say 'doc' or 'hey doc', then ask for something like the following:
@@ -24,13 +24,13 @@ defmodule SlackertonChat.Responders do
   ... list admins - lists admins for the current slack team
   """
 
-  hear ~r/^hey doc|^doc|^devdoc/i, msg do
+  hear ~r/^hey doc|^doc|^dev/i, msg do
     
     input = 
       msg.text
-      |> String.replace(~r/hey doc|doc/, "", global: false)
+      |> String.replace(~r/hey doc|doc|dev/, "", global: false)
       |> String.trim()
-      |> Normalize.decode_characters()
+      |> Helpers.decode_characters()
       
     Lex.put_text(input, Lex.user(msg), Lex.context(msg)) |> Lex.converse(msg)
 

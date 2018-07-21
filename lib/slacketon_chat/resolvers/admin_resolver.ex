@@ -1,23 +1,11 @@
-defmodule SlackertonChatChat.UserResolver do
-  alias SlackertonChat.Normalize
+defmodule SlackertonChat.AdminResolver do
+  alias SlackertonChat.Helpers
   alias Slackerton.Accounts.Admin
   alias Hedwig.Responder
 
-  @rejections [
-    "I'm afraid I can't let you do that.",
-    "No", 
-    "I don't have to listen to you, you're not my real dad!",
-    "You're not an admin",
-    "Hah, nice try.",
-    "You wish",
-    "No. Stop it.",
-    "Maybe later.",
-    "You'll have to ask Matt first."
-  ]
-
   def create_admin(msg, %{ "User" => user}) do
-    team = Normalize.team_id(msg)
-    caller = Normalize.user_id(msg.user)
+    team = Helpers.team_id(msg)
+    caller = Helpers.user_id(msg.user)
     user = String.trim_leading(user, "@")
 
     if Admin.is_admin?(caller, team) do
@@ -25,7 +13,7 @@ defmodule SlackertonChatChat.UserResolver do
       
       Responder.reply(msg, "Ok, I've made #{user} an admin.")
     else
-      Responder.reply(msg, Enum.random(@rejections))
+      Responder.reply(msg, Admin.reject())
     end
   end
 
@@ -35,8 +23,8 @@ defmodule SlackertonChatChat.UserResolver do
 
 
   def delete_admin(msg, %{ "User" => user}) do
-    team = Normalize.team_id(msg)
-    caller = Normalize.user_id(msg.user)
+    team = Helpers.team_id(msg)
+    caller = Helpers.user_id(msg.user)
     user = String.trim_leading(user, "@")
 
     if Admin.is_admin?(caller, team) do
@@ -45,7 +33,7 @@ defmodule SlackertonChatChat.UserResolver do
       
       Responder.reply(msg, "Ok, I've removed #{user} from the admin list.")
     else
-      Responder.reply(msg, Enum.random(@rejections))
+      Responder.reply(msg, Admin.reject())
     end
   end
 
@@ -57,7 +45,7 @@ defmodule SlackertonChatChat.UserResolver do
   def list_admins(msg, _) do
     admin_list =
       msg
-      |> Normalize.team_id()
+      |> Helpers.team_id()
       |> Admin.list_admins()
 
     case admin_list do
@@ -66,7 +54,7 @@ defmodule SlackertonChatChat.UserResolver do
       {:ok, list } ->
         admin_string = 
           list
-          |> Enum.map(fn user -> Normalize.to_user_string(user) end)
+          |> Enum.map(fn user -> Helpers.to_user_string(user) end)
           |> Enum.join(", ")
 
         Responder.reply(msg, "The admins for this team: #{admin_string}")

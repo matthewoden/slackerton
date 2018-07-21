@@ -1,5 +1,5 @@
 defmodule SlackertonChat.DadJokesResolver do
-  alias SlackertonChat.{Robot, Normalize}
+  alias SlackertonChat.{Robot, Helpers}
   alias Slackerton.DadJokes
 
   def tell_joke(msg, %{ "Genre" => genre }) do
@@ -11,8 +11,8 @@ defmodule SlackertonChat.DadJokesResolver do
       10 ->
         subject =
           msg.text
-          |> Normalize.decode_characters()
-          |> String.split(~r/(I'm)|(I’m)/i, [parts: 2])
+          |> Helpers.decode_characters()
+          |> String.split(~r/(I'm)|(I’m)/i, [parts: 2]) #todo, write match cleaner
           |> Enum.at(1)
           |> String.split(~r/\.|\?|,|!/)
           |> Enum.at(0)
