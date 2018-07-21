@@ -41,6 +41,10 @@ slackerton:
   ... add @user as an admin - adds a user as an admin
   ... remove @user from admins - removes user from admins
   ... list admins - lists admins for the current slack team
+
+  ... ignore @user - stop responding to a user
+  ... unignore @user - stop ignoring a user
+  ... list ignored - lists all ignored users for the current team
 ```
 
 ---
