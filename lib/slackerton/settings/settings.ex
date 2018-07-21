@@ -12,21 +12,16 @@ defmodule Slackerton.Settings do
 
   def set(service, key, value) do
     with {:ok, encoded_value } <- Jason.encode(value) do
-      Repo.upsert(Setting, %{service: service, key: key }, [
-        expression_attribute_names: %{ "#val" => "value"},
-        expression_attribute_values: [ value: encoded_value ],
-        update_expression: "set #val = :value"
-      ])
-
+      Repo.upsert(Setting, %{service: service, key: key }, set: [ value: encoded_value ] )
     else
       otherwise -> 
-        IO.inspect(otherwise)
+        Logger.debug("Setting Failed with: #{inspect(otherwise)}")
         otherwise
     end
   end
 
   def all(service) do
-    Repo.scan(Setting, "service = :service", [service: service])
+    Repo.scan(Setting, where: [service: service])
   end
 
 end
