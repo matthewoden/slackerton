@@ -8,6 +8,7 @@ defmodule Slackerton.MixProject do
       elixir: "~> 1.6",
       elixirc_paths: elixirc_paths(Mix.env),
       start_permanent: Mix.env() == :prod,
+      compilers: [:phoenix, :gettext] ++ Mix.compilers,
       deps: deps()
     ]
   end
@@ -15,13 +16,14 @@ defmodule Slackerton.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      mod: {Slackerton, []},
       extra_applications: [
         :logger, 
         :timex,
         :hedwig, 
         :hedwig_slack,
-      ],
-      mod: {Slackerton, []}
+        :runtime_tools
+      ]
     ]
   end
 
@@ -44,7 +46,20 @@ defmodule Slackerton.MixProject do
       {:ex_aws, "~> 2.0"},
       {:ex_aws_dynamo, "~> 2.0"},
       {:hackney, ">= 1.9.0"},
-      {:sched_ex, "~> 1.0"}
+      {:sched_ex, "~> 1.0"},
+      {:phoenix, "~> 1.3.3"},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix_html, "~> 2.10"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:gettext, "~> 0.11"},
+      {:cowboy, "~> 1.0"}
+    ]
+  end
+
+  defp aliases do
+    [
+      dev: ["phx.server"]
+      deploy: ["cd assets", "npm run deploy", "cd ../", "phx.digest"]
     ]
   end
 end

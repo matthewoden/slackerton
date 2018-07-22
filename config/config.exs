@@ -64,4 +64,13 @@ config :slackerton, Slackerton.Github.Api,
   repo: "slackerton/slackerton-dev-issues",
   api_key: System.get_env("SLACKERTON_GITHUB_TOKEN")
 
+
+config :slackerton, SlackertonWeb.Endpoint,
+  url: [host: "localhost"],
+  secret_key_base: "v9Ozto4u7pZoMPJLqJPs2Y8BE6u1TtbBRlquZKscgpww7Z5NxP3ni50WJoVsaPSk",
+  render_errors: [view: SlackertonWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: Slackerton.PubSub,
+           adapter: Phoenix.PubSub.PG2]
+
+
 import_config "#{Mix.env}.exs"

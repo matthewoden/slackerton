@@ -22,4 +22,11 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 slackerton-*.tar
 
-_lex
+#build assets
+/priv/static/
+
+# Generated on crash by NPM
+npm-debug.log
+
+# Static artifacts
+/assets/node_modules

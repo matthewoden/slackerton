@@ -1,8 +1,8 @@
 defmodule SlackertonChat.MutedResolver do
+  use SlackertonChat
+
   alias SlackertonChat.Helpers
   alias Slackerton.Accounts.{Admin,Muted}
-  alias SlackertonChat.Robot
-  alias Hedwig.Responder
 
   def mute_user(msg, %{ "User" => user}) do
     team = Helpers.team_id(msg)
@@ -11,14 +11,14 @@ defmodule SlackertonChat.MutedResolver do
 
     if Admin.is_admin?(caller, team) do
       Muted.set_muted(user, team, true)
-      Robot.thread(msg, "Ok, I'll ignore #{user}.")
+      thread(msg, "Ok, I'll ignore #{user}.")
     else
-      Robot.thread(msg, Admin.reject())
+      thread(msg, Admin.reject())
     end
   end
 
   def mute_user(msg, _) do
-    Robot.thread(msg, "Whoa, I didn't quite get the right info there.")
+    thread(msg, "Whoa, I didn't quite get the right info there.")
   end
 
 
@@ -31,14 +31,14 @@ defmodule SlackertonChat.MutedResolver do
       user = String.trim_leading(user, "@")
       Admin.set_admin(user, team, false)
       
-      Responder.reply(msg, "Ok, I'll stop ignoring #{user}")
+      reply(msg, "Ok, I'll stop ignoring #{user}")
     else
-      Responder.reply(msg, Admin.reject())
+      reply(msg, Admin.reject())
     end
   end
 
-  def unmute_user(msg, _) do
-    Responder.reply(msg, "Whoa, I didn't quite get the right info there.")
+  def unmute_user(msg, _) do 
+    reply(msg, "Whoa, I didn't quite get the right info there.")
   end
 
 
@@ -50,7 +50,7 @@ defmodule SlackertonChat.MutedResolver do
 
     case muted_list do
       {:ok, [] } ->
-        Responder.reply(msg, "There are no ignored users.")
+        reply(msg, "There are no ignored users.")
 
       {:ok, list } ->
         muted_string = 
@@ -58,10 +58,10 @@ defmodule SlackertonChat.MutedResolver do
           |> Enum.map(fn user -> Helpers.to_user_string(user) end)
           |> Enum.join(", ")
 
-        Responder.reply(msg, "The ignored users on this team: #{muted_string}")
+        reply(msg, "The ignored users on this team: #{muted_string}")
 
       {:error, _} ->
-        Responder.reply(msg, "Sorry, I couldn't get the complete ignored list at this time.")
+        reply(msg, "Sorry, I couldn't get the complete ignored list at this time.")
     end
   end
 
