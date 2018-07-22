@@ -32,7 +32,7 @@ defmodule SlackertonChat.Responders do
   ... list ignored - lists all ignored users for the current team
   """
 
-  hear ~r/^hey doc|^doc|/i, msg do
+  hear ~r/^hey doc|^doc/i, msg do
     
     input = 
       msg.text
