@@ -13,12 +13,7 @@ const dev = {
     { loader: "css-loader", options: { modules: true } },
     "sass-loader"
   ],
-  plugins: [
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("development"),
-      API_ENDPOINT: "https://localhost:4000"
-    })
-  ]
+  plugins: []
 };
 
 const prod = {
@@ -39,13 +34,7 @@ const prod = {
     },
     "sass-loader"
   ],
-  plugins: [
-    new MiniCssExtractPlugin({ filename: "app.css" }),
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("production"),
-      API_ENDPOINT: "https://localhost:4000"
-    })
-  ]
+  plugins: [new MiniCssExtractPlugin({ filename: "app.css" })]
 };
 
 module.exports = function webpacker() {
@@ -76,7 +65,13 @@ module.exports = function webpacker() {
         }
       ]
     },
-    plugins: options.plugins,
+    plugins: [
+      new webpack.DefinePlugin({
+        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+        API_ENDPOINT: "https://localhost:4000"
+      }),
+      ...options.plugins
+    ],
     resolve: {
       modules: ["node_modules", path.resolve(__dirname, "js")],
       extensions: [".js", ".jsx"]

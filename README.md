@@ -2,13 +2,13 @@
 
 A mostly useless Hedwig Slackbot for a local slack, but can be run in multiple slack channels.
 
-Uses my fork of [Hedwig_Slack](https://github.com/matthewoden/hedwig_slack), to enable support for Slack threading.
+Uses my fork of [Hedwig_Slack](https://github.com/matthewoden/hedwig_slack), to enable support for Slack threading, attachments
 
 ## Structure
 
 - slackerton - core services, cache warmer, credential store
-- slackerton_chat - contains logic for the chat interface. Responders for Hedwig, Resolvers for AWS Lex
-- slackerton_web - TODO: contains the logic for the web interface
+- slackerton_chat - contains logic for the chat interface, responders for Hedwig, resolvers for AWS Lex
+- slackerton_web - WIP/TODO: contains the logic for the web interface. (phoenix)
 
 ## Current Responders/Resolvers:
 
@@ -68,3 +68,16 @@ Hey doc
 ... list ignored - lists all ignored users for the current team
 
 ---
+
+## Roadmap
+
+- Complete Web API/Admin View
+
+  - Disable/Enable bot remotely
+  - Impersonate Bot
+  - Log view?
+
+- Push Notification / Refactor
+  - Sports Scores
+  - RSS feeds?
+  - Morning Briefing: Weather, Top 3 New stories, and Urban Dictionary WOTD
