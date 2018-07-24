@@ -71,8 +71,7 @@ module.exports = function webpacker() {
     },
     plugins: [
       new webpack.DefinePlugin({
-        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-        API_ENDPOINT: "https://localhost:4000"
+        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
       }),
       ...options.plugins
     ],

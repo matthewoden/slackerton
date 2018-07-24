@@ -1,5 +1,5 @@
 cd assets/
 npm run deploy
 cd ../
-mix phx.digest
+MIX_ENV=prod mix phx.digest
 git push heroku master
