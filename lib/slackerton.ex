@@ -10,7 +10,7 @@ defmodule Slackerton do
     children = [
       {Slackerton.Supervisor, []},
       {SlackertonChat.Supervisor, []},
-      supervisor(SlackertonWeb.Endpoint, [])
+      supervisor(SlackertonWeb.Endpoint, []),
       scheduled("ping", {SlackertonWeb.Ping,:run,[]}, "*/25 * * * *")
     ]
 
