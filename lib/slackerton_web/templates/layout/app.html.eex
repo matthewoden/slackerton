@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://unpkg.com/material-components-web@0.36.1/dist/material-components-web.min.css" rel="stylesheet" />
     <%= if Mix.env == :prod do %>
-      <link rel="stylesheet" href="<%= static_path(@conn, "/app.css") %>">
+      <link rel="stylesheet" href="<%= static_path(@conn, "/build/app.css") %>">
     <% end %>
   </head>
 
@@ -21,7 +21,7 @@
     <%= if Mix.env == :dev do %>
       <script src='http://localhost:8080/app.js'></script>
     <% else %>
-      <script src="<%= static_path(@conn, "/app.js") %>"></script>
+      <script src="<%= static_path(@conn, "/build/app.js") %>"></script>
     <% end %>
   </body>
 </html>
