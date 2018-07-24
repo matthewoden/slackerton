@@ -56,10 +56,4 @@ defmodule Slackerton.MixProject do
     ]
   end
 
-  defp aliases do
-    [
-      dev: ["phx.server"]
-      deploy: ["cd assets", "npm run deploy", "cd ../", "phx.digest"]
-    ]
-  end
 end
