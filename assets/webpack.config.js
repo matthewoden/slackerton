@@ -18,7 +18,7 @@ const dev = {
 
 const prod = {
   output: {
-    path: path.resolve(__dirname, "../priv/static/"),
+    path: path.resolve(__dirname, "../priv/static/build"),
     filename: "app.js",
     publicPath: "/"
   },

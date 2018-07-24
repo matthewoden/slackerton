@@ -9,7 +9,7 @@ defmodule SlackertonWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/", from: :slackerton, gzip: Mix.env() == :prod,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(build css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
