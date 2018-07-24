@@ -12,6 +12,7 @@ config :slackerton, Slackerton.Github.Api,
 config :slackerton, SlackertonWeb.Endpoint,
   load_from_system_env: true,
   url: [scheme: "https", host: "dnd-slackbot.herokuapp.com", port: 443],
+  #url: [host: "localhost"],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: Map.fetch!(System.get_env(), "SLACKERTON_SECRET_KEY_BASE")

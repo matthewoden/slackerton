@@ -18,7 +18,7 @@ const dev = {
 
 const prod = {
   output: {
-    path: path.resolve(__dirname, "../priv/static/js"),
+    path: path.resolve(__dirname, "../priv/static/"),
     filename: "app.js",
     publicPath: "/"
   },
@@ -34,7 +34,11 @@ const prod = {
     },
     "sass-loader"
   ],
-  plugins: [new MiniCssExtractPlugin({ filename: "app.css" })]
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "app.css"
+    })
+  ]
 };
 
 module.exports = function webpacker() {
