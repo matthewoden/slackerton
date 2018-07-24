@@ -11,6 +11,7 @@ defmodule Slackerton do
       {Slackerton.Supervisor, []},
       {SlackertonChat.Supervisor, []},
       supervisor(SlackertonWeb.Endpoint, [])
+      scheduled("ping", {SlackertonWeb.Ping,:run,[]}, "*/25 * * * *")
     ]
 
     opts = [strategy: :one_for_one, name: SlackertonApp.Supervisor]
@@ -22,6 +23,16 @@ defmodule Slackerton do
   def config_change(changed, _new, removed) do
     SlackertonWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+
+  def scheduled(id, {mod, fun, args}, cron) do
+    %{ 
+      id: id, 
+      start: {SchedEx, :run_every, [
+        mod, fun, args, cron
+      ]} 
+    }
   end
 
 end

@@ -12,7 +12,7 @@ defmodule SlackertonChat.Supervisor do
       {Lex, lex_config()},
       # TODO: rig up multiple slacks at once
       robot({"dnd", System.get_env("SLACKERTON_DND_SLACK_TOKEN") }),
-      scheduled("weather_alerts", { WeatherResolver, :broadcast_alert, []}, "*/5 * * * *")
+      Slackerton.scheduled("weather_alerts", { WeatherResolver, :broadcast_alert, []}, "*/5 * * * *")
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
@@ -33,15 +33,6 @@ defmodule SlackertonChat.Supervisor do
       start: {Hedwig, :start_robot, [ 
         Robot,  [ team: team, token: token ]
       ]}
-    }
-  end
-
-  def scheduled(id, {mod, fun, args}, cron) do
-    %{ 
-      id: id, 
-      start: {SchedEx, :run_every, [
-        mod, fun, args, cron
-      ]} 
     }
   end
 

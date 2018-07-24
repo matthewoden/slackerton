@@ -13,9 +13,9 @@ defmodule SlackertonWeb.Router do
     plug :accepts, ["json"]
   end
 
-  # Other scopes may use custom stacks.
   scope "/api", SlackertonWeb do
     pipe_through :api
+    get "/ping", HelperController, :index
   end
 
   scope "/", SlackertonWeb do
