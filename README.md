@@ -1,6 +1,6 @@
 # Slackerton
 
-A mostly useless Hedwig Slackbot for a local slack, but can be run in multiple slack channels.
+A natual lanugage based Slackbot for a local slack.
 
 Uses my fork of [Hedwig_Slack](https://github.com/matthewoden/hedwig_slack), to enable support for Slack threading, attachments
 
